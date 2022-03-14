@@ -1,40 +1,41 @@
 package application;
 
-import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.Parent;
-import javafx.stage.Stage;
-import javafx.fxml.FXMLLoader;
-
+import java.io.File;
+import java.io.IOException;
 import java.io.FileNotFoundException;
 
-import application.model.Database;
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.stage.Stage;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+
+import application.controller.LoginController;
+import application.controller.SignUpController;
 import application.controller.CreateController;
+import application.model.Database;
+import application.model.Accounts;
 
 public class Main extends Application {
 
     @Override
-    public void start(Stage primaryStage) {
-        Database db = null;
-        try {
-            db = new Database(getClass().getResource("/data/syllabyeDB.json").getPath());
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-            System.exit(1);
-        }
-        CreateController.setDatabase(db);
-        try {
-            Parent root = FXMLLoader.load(getClass().getResource("/fxml/Main.fxml"));
-            Scene scene = new Scene(root, 300, 250);
-            primaryStage.setTitle("Hello World!");
-            primaryStage.setScene(scene);
-            primaryStage.show();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    public void start(Stage primaryStage) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource(File.separator + "fxml" + File.separator + "LoginPage.fxml"));
+        Scene scene = new Scene(root);
+        primaryStage.setScene(scene);
+        primaryStage.setTitle("Syllabye");
+        primaryStage.show();
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws FileNotFoundException, IOException {
+        Database db = new Database(Main.class.getResource(File.separator + "data" + File.separator + "syllabyeDB.json"));
+        db.readSyllabye();
+        if (Database.getSyllabye() == null)
+            Database.resetSyllabye();
+        CreateController.setDatabase(db);
+        Accounts ac = new Accounts();
+        SignUpController.setAccounts(ac);
+        LoginController.setAccounts(ac);
         launch(args);
     }
 }

@@ -1,16 +1,11 @@
 package application.controller;
 
+import java.io.IOException;
+
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.TextField;
-import javafx.fxml.FXMLLoader;
-import javafx.stage.Stage;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.event.ActionEvent;
-
-import java.io.IOException;
 
 import application.model.Syllabus;
 import application.model.Semester;
@@ -30,12 +25,9 @@ public class CreateController {
     @FXML
     private TextField year;
 
-    @FXML
-    private Button previousScene;
-
     private static Database db;
 
-    public void onSave() {
+    public void onSave() throws IOException {
         Syllabus s = new Syllabus(
                 courseName.getText(),
                 Integer.parseInt(courseNumber.getText()),
@@ -44,21 +36,7 @@ public class CreateController {
                 Semester.valueOf(semester.getText().toUpperCase()),
                 Integer.parseInt(year.getText()));
         getDatabase().add(s);
-        getDatabase().write();
-        clickToPreviousPane();
-    }
-
-    public void clickToPreviousPane() {
-        Stage stage = (Stage) previousScene.getScene().getWindow();
-        Parent root = null;
-        try {
-            root = FXMLLoader.load(getClass().getResource("/fxml/Main.fxml"));
-        } catch (IOException e) {
-            e.printStackTrace();
-            System.exit(1);
-        }
-        Scene scene = new Scene(root, 300, 250);
-        stage.setScene(scene);
+        getDatabase().writeSyllabye();
     }
 
     public void setSemesterToSpring(ActionEvent event) {

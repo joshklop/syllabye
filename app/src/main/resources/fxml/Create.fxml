@@ -53,7 +53,4 @@
    <right>
       <Button fx:id="save" mnemonicParsing="false" onMouseClicked="#onSave" text="Save" BorderPane.alignment="CENTER" />
    </right>
-   <left>
-      <Button fx:id="previousScene" mnemonicParsing="false" onMouseClicked="#clickToPreviousPane" text="prev scene" BorderPane.alignment="CENTER" />
-   </left>
 </BorderPane>
