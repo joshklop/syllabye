@@ -1,15 +1,13 @@
 package application.controller;
 
+import application.model.Syllabus;
+import application.model.Semester;
+import application.model.Database;
 import java.io.IOException;
-
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.TextField;
 import javafx.event.ActionEvent;
-
-import application.model.Syllabus;
-import application.model.Semester;
-import application.model.Database;
 
 public class CreateController {
     @FXML
