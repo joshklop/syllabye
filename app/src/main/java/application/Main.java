@@ -30,8 +30,8 @@ public class Main extends Application {
     public static void main(String[] args) throws FileNotFoundException, IOException {
         Database db = new Database(Main.class.getResource(File.separator + "data" + File.separator + "syllabyeDB.json"));
         db.readSyllabye();
-        if (Database.getSyllabye() == null)
-            Database.resetSyllabye();
+        if (db.getSyllabye() == null)
+            db.resetSyllabye();
         CreateController.setDatabase(db);
         Accounts ac = new Accounts();
         SignUpController.setAccounts(ac);

@@ -7,15 +7,22 @@ public class Syllabus {
     private String professorName;
     private Semester semester;
     private int year;
+    private String location;
+    private String professorEmail;
+    private boolean extraCredit;
 
     public Syllabus(String courseName, int courseNumber, String courseSubject, 
-            String professorName, Semester semester, int year) {
+            String professorName, Semester semester, int year, String location,
+            String professorEmail, boolean extraCredit) {
         this.setCourseName(courseName);
         this.setCourseNumber(courseNumber);
         this.setCourseSubject(courseSubject);
         this.setProfessorName(professorName);
         this.setSemester(semester);
         this.setYear(year);
+        this.setLocation(location);
+        this.setProfessorEmail(professorEmail);
+        this.setExtraCredit(extraCredit);
     }
 
     public String getCourseName() {
@@ -64,5 +71,29 @@ public class Syllabus {
 
     public void setYear(int year) {
         this.year = year;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public String getProfessorEmail() {
+        return professorEmail;
+    }
+
+    public void setProfessorEmail(String professorEmail) {
+        this.professorEmail = professorEmail;
+    }
+
+    public boolean isExtraCredit() {
+        return extraCredit;
+    }
+
+    public void setExtraCredit(boolean extraCredit) {
+        this.extraCredit = extraCredit;
     }
 }

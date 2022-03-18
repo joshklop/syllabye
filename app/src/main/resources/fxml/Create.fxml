@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.MenuButton?>
-<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -13,16 +13,17 @@
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.CreateController">
    <top>
-      <Label text="Create Syllabus" BorderPane.alignment="CENTER">
+      <Label text="Add Syllabus" BorderPane.alignment="CENTER">
          <font>
             <Font size="35.0" />
          </font>
       </Label>
    </top>
    <center>
-      <GridPane BorderPane.alignment="CENTER">
+      <GridPane alignment="CENTER" BorderPane.alignment="CENTER">
         <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="283.0" minWidth="10.0" prefWidth="190.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="398.0" minWidth="10.0" prefWidth="390.0" />
         </columnConstraints>
         <rowConstraints>
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -31,26 +32,84 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <TextField fx:id="courseSubject" promptText="Course Subject (e.g. CS)" />
-            <TextField fx:id="courseNumber" promptText="Course Number (e.g. 3443)" GridPane.rowIndex="1" />
-            <TextField fx:id="courseName" promptText="Course Name (e.g. Applications Programming)" GridPane.rowIndex="2" />
-            <TextField fx:id="professorName" promptText="Professor Name" GridPane.rowIndex="3" />
-            <TextField fx:id="year" promptText="Year" GridPane.rowIndex="4" />
-            <MenuButton fx:id="semester" contentDisplay="CENTER" mnemonicParsing="false" text="Semester" GridPane.halignment="CENTER" GridPane.rowIndex="5">
-              <items>
-                <MenuItem fx:id="springSemester" mnemonicParsing="false" onAction="#setSemesterToSpring" text="Spring" />
-                <MenuItem fx:id="maymester" mnemonicParsing="false" onAction="#setSemesterToMay" text="May" />
-                  <MenuItem fx:id="summerSemester" mnemonicParsing="false" onAction="#setSemesterToSummer" text="Summer" />
-                  <MenuItem fx:id="fallSemester" mnemonicParsing="false" onAction="#setSemesterToFall" text="Fall" />
-                  <MenuItem fx:id="wintermester" mnemonicParsing="false" onAction="#setSemesterToWinter" text="Winter" />
-              </items>
-            </MenuButton>
+            <TextField fx:id="courseSubject" promptText="CS" GridPane.columnIndex="1" />
+            <TextField fx:id="courseNumber" promptText="3343" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <ChoiceBox fx:id="semester" prefWidth="150.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+            <TextField fx:id="year" promptText="2022" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <TextField fx:id="courseName" promptText="Applications Programming" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <TextField fx:id="location" promptText="e.g., Humanities Building R100, Zoom link" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+            <TextField fx:id="professorName" promptText="John Doe" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+            <TextField fx:id="professorEmail" promptText="john.doe@university.edu" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+            <ChoiceBox fx:id="extraCredit" prefWidth="150.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="8" />
+            <Label text="Course Subject*" GridPane.halignment="CENTER">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Label>
+            <Label text="Course Number*" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Label>
+            <Label text="Course Name" GridPane.halignment="CENTER" GridPane.rowIndex="4">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Label>
+            <Label text="Professor Name" GridPane.halignment="CENTER" GridPane.rowIndex="6">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Label>
+            <Label text="Year*" GridPane.halignment="CENTER" GridPane.rowIndex="3">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Label>
+            <Label text="Semester*" GridPane.halignment="CENTER" GridPane.rowIndex="2">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Label>
+            <Label text="Professor Email" GridPane.halignment="CENTER" GridPane.rowIndex="7">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Label>
+            <Label text="Location" GridPane.halignment="CENTER" GridPane.rowIndex="5">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Label>
+            <Label text="Extra Credit" GridPane.halignment="CENTER" GridPane.rowIndex="8">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Label>
          </children>
       </GridPane>
    </center>
-   <right>
-      <Button fx:id="save" mnemonicParsing="false" onMouseClicked="#onSave" text="Save" BorderPane.alignment="CENTER" />
-   </right>
+   <padding>
+      <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+   </padding>
+   <bottom>
+      <GridPane alignment="CENTER" prefHeight="49.0" prefWidth="558.0" BorderPane.alignment="CENTER">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" />
+        </columnConstraints>
+        <rowConstraints>
+            <RowConstraints maxHeight="25.0" minHeight="10.0" prefHeight="25.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="26.0" minHeight="10.0" prefHeight="26.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Button fx:id="save" mnemonicParsing="false" onAction="#onSave" text="Save" textFill="#030303" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+            <Label fx:id="warning" alignment="CENTER" prefHeight="17.0" prefWidth="559.0" textFill="RED" GridPane.halignment="CENTER" />
+         </children>
+      </GridPane>
+   </bottom>
 </BorderPane>
