@@ -47,4 +47,13 @@ public class SelectionController {
         stage.setScene(scene);
         stage.show();
     }
+    
+    @FXML
+    public void switchToViewScene(ActionEvent event) throws IOException {
+        root = FXMLLoader.load(getClass().getResource(File.separator + "fxml" + File.separator + "ViewPage.fxml"));
+        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
 }

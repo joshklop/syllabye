@@ -12,6 +12,7 @@ import javafx.scene.Scene;
 
 import application.controller.LoginController;
 import application.controller.SignUpController;
+import application.controller.ViewController;
 import application.controller.CreateController;
 import application.model.Database;
 import application.model.Accounts;
@@ -33,6 +34,7 @@ public class Main extends Application {
         if (db.getSyllabye() == null)
             db.resetSyllabye();
         CreateController.setDatabase(db);
+        ViewController.setSyllabye(db.getSyllabye());
         Accounts ac = new Accounts();
         SignUpController.setAccounts(ac);
         LoginController.setAccounts(ac);

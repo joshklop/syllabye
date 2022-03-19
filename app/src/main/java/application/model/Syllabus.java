@@ -96,4 +96,11 @@ public class Syllabus {
     public void setExtraCredit(boolean extraCredit) {
         this.extraCredit = extraCredit;
     }
+    
+    public String toString() {
+    	String content = courseName + " (" + courseSubject + courseNumber + ")\nProfessor: " + professorName
+    			+ "\t\tEmail: " + professorEmail + "\nLocation: " + location
+    			+ (extraCredit ? "\nExtra credit is available for this class\n": "\nNo Extra Credit is available for this class\n");
+    	return content;
+    }
 }
