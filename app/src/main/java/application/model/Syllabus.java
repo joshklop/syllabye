@@ -1,5 +1,8 @@
 package application.model;
 
+import java.time.DayOfWeek;
+import java.util.HashMap;
+
 public class Syllabus {
     private String courseName;
     private int courseNumber;
@@ -10,10 +13,12 @@ public class Syllabus {
     private String location;
     private String professorEmail;
     private boolean extraCredit;
+    private HashMap<DayOfWeek,LectureTime> lectureDayTimes;
 
     public Syllabus(String courseName, int courseNumber, String courseSubject, 
             String professorName, Semester semester, int year, String location,
-            String professorEmail, boolean extraCredit) {
+            String professorEmail, boolean extraCredit, 
+            HashMap<DayOfWeek,LectureTime> lectureDayTimes) {
         this.setCourseName(courseName);
         this.setCourseNumber(courseNumber);
         this.setCourseSubject(courseSubject);
@@ -23,6 +28,7 @@ public class Syllabus {
         this.setLocation(location);
         this.setProfessorEmail(professorEmail);
         this.setExtraCredit(extraCredit);
+        this.setLectureDayTimes(lectureDayTimes);
     }
 
     public String getCourseName() {
@@ -102,5 +108,13 @@ public class Syllabus {
     			+ "\t\tEmail: " + professorEmail + "\nLocation: " + location
     			+ (extraCredit ? "\nExtra credit is available for this class\n": "\nNo Extra Credit is available for this class\n");
     	return content;
+    }
+
+    public HashMap<DayOfWeek,LectureTime> getLectureDayTimes() {
+        return lectureDayTimes;
+    }
+
+    public void setLectureDayTimes(HashMap<DayOfWeek,LectureTime> lectures) {
+        this.lectureDayTimes = lectures;
     }
 }

@@ -1,6 +1,8 @@
 package application.model;
 
+import application.model.LocalTimeConverter;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -11,10 +13,16 @@ import java.io.FileWriter;
 import java.io.BufferedWriter;
 import java.lang.reflect.Type;
 import java.net.URL;
+import java.time.LocalTime;
 import java.util.HashMap;
 
 public class Database {
     private static File file;
+    private static Type syllabyeType = new TypeToken<HashMap<String, Syllabus>>() {}.getType();
+    private static Gson gson = new GsonBuilder()
+        .registerTypeAdapter(LocalTime.class, new LocalTimeConverter())
+        .setPrettyPrinting()
+        .create();
     private HashMap<String, Syllabus> syllabye;
 
     public Database(URL resource) throws FileNotFoundException {
@@ -30,17 +38,13 @@ public class Database {
         BufferedReader br = new BufferedReader(new FileReader(getFile().getPath()));
         String result = br.readLine();
         br.close();
-        Type syllabyeType = new TypeToken<HashMap<String, Syllabus>>() {}.getType();
-        setSyllabye((new Gson()).fromJson(result, syllabyeType));
+        setSyllabye(gson.fromJson(result, syllabyeType));
     }
 
     public void writeSyllabye() throws IOException {
         BufferedWriter bw = null;
         bw = new BufferedWriter(new FileWriter(file.getPath()));
-        // TODO Should we make the syllabye TypeToken a static member of the class with a getter?
-        // It gets reused in many places...
-        Type syllabyeType = new TypeToken<HashMap<String, Syllabus>>() {}.getType();
-        bw.write((new Gson()).toJson(syllabye, syllabyeType).toString()); 
+        bw.write(gson.toJson(syllabye, syllabyeType).toString()); 
         bw.close();
     }
 
