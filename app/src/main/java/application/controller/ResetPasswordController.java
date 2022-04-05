@@ -18,7 +18,7 @@ public class ResetPasswordController {
 
     @FXML
     public void switchToLoginScene(ActionEvent event ) throws IOException {
-        root = FXMLLoader.load(getClass().getResource(File.separator + "fxml" + File.separator + "LoginPage.fxml"));
+        root = FXMLLoader.load(getClass().getResource("/fxml/LoginPage.fxml"));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
