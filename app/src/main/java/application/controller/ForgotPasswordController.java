@@ -37,7 +37,7 @@ public class ForgotPasswordController implements Initializable {
 
     @FXML
     public void switchToLoginScene(ActionEvent event ) throws IOException {
-        root = FXMLLoader.load(getClass().getResource(File.separator + "fxml" + File.separator + "LoginPage.fxml"));
+        root = FXMLLoader.load(getClass().getResource("/fxml/LoginPage.fxml"));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
@@ -46,7 +46,7 @@ public class ForgotPasswordController implements Initializable {
 
     @FXML
     public void switchToResetScene(ActionEvent event ) throws IOException {
-        root = FXMLLoader.load(getClass().getResource(File.separator + "fxml" + File.separator + "ResetPasswordPage.fxml"));
+        root = FXMLLoader.load(getClass().getResource("/fxml/ResetPasswordPage.fxml"));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);

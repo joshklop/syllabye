@@ -21,7 +21,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource(File.separator + "fxml" + File.separator + "LoginPage.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/fxml/LoginPage.fxml"));
         Scene scene = new Scene(root);
         primaryStage.setScene(scene);
         primaryStage.setTitle("Syllabye");
@@ -29,7 +29,7 @@ public class Main extends Application {
     }
 
     public static void main(String[] args) throws FileNotFoundException, IOException {
-        Database db = new Database(Main.class.getResource(File.separator + "data" + File.separator + "syllabyeDB.json"));
+        Database db = new Database(Main.class.getResource("/data/syllabyeDB.json"));
         db.readSyllabye();
         if (db.getSyllabye() == null)
             db.resetSyllabye();

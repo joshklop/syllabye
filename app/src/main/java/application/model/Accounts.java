@@ -12,7 +12,7 @@ public class Accounts {
 
     private ArrayList<Profile> profiles = new ArrayList<Profile>(); // TODO make static?
     // TODO change to `File` object and load from resources (should it be `final`?)
-    private static final String FILENAME = File.separator + "data" + File.separator + "accountdata.txt";
+    private static final String FILENAME = "/data/accountdata.txt";
 
     public static String getFilename() {
         return FILENAME;
