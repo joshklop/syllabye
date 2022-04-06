@@ -204,6 +204,15 @@ public class CreateController implements Initializable {
             }
         }
     }
+    
+    @FXML
+    public void goHome(ActionEvent event) throws IOException {
+    	//note: nothing will save when the user presses the home button
+    	Parent root = FXMLLoader.load(getClass().getResource("/fxml/selectionPage.fxml"));
+    	Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+    	stage.setScene(new Scene(root));
+    	stage.show();
+    }
 
     @FXML
     public void filterTimes(ActionEvent event) {

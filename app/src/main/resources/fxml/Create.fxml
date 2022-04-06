@@ -150,6 +150,7 @@
          <children>
             <Button fx:id="save" mnemonicParsing="false" onAction="#onSave" text="Save" textFill="#030303" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
             <Label fx:id="warning" alignment="CENTER" prefHeight="17.0" prefWidth="559.0" textFill="RED" GridPane.halignment="CENTER" />
+            <Button fx:id="home" mnemonicParsing="false" onAction="#goHome" text="Home" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
          </children>
       </GridPane>
    </bottom>
