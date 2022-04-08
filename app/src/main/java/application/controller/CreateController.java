@@ -4,6 +4,7 @@ import application.model.Syllabus;
 import application.model.Semester;
 import application.model.Database;
 import application.model.LectureTime;
+import application.model.RecitationTime;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -71,6 +72,28 @@ public class CreateController implements Initializable {
     private ComboBox<LocalTime> fridayStart;
     @FXML
     private ComboBox<LocalTime> fridayEnd;
+    
+    // Recitation Times
+    @FXML
+    private ComboBox<LocalTime> mondayStart1;
+    @FXML
+    private ComboBox<LocalTime> mondayEnd1;
+    @FXML
+    private ComboBox<LocalTime> tuesdayStart1;
+    @FXML
+    private ComboBox<LocalTime> tuesdayEnd1;
+    @FXML
+    private ComboBox<LocalTime> wednesdayStart1;
+    @FXML
+    private ComboBox<LocalTime> wednesdayEnd1;
+    @FXML
+    private ComboBox<LocalTime> thursdayStart1;
+    @FXML
+    private ComboBox<LocalTime> thursdayEnd1;
+    @FXML
+    private ComboBox<LocalTime> fridayStart1;
+    @FXML
+    private ComboBox<LocalTime> fridayEnd1;
 
     private static Database db;
 
@@ -135,6 +158,7 @@ public class CreateController implements Initializable {
         // TODO clean up this mess: make a nice DatePicker-like UI, but with days of the week
         // and times instead. Didn't have time for that on the first try
         // TODO there should be a "default" value that allows users to cancel a selection...
+        //Lecture Times
         mondayStart.setConverter(converter);
         mondayStart.getItems().addAll(localTimes);
         mondayEnd.setConverter(converter);
@@ -155,7 +179,30 @@ public class CreateController implements Initializable {
         fridayStart.getItems().addAll(localTimes);
         fridayEnd.setConverter(converter);
         fridayEnd.getItems().addAll(localTimes);
-
+        
+        //Recitations 
+        mondayStart1.setConverter(converter);;
+        mondayStart1.getItems().addAll(localTimes);
+        mondayEnd1.setConverter(converter);
+        mondayEnd1.getItems().addAll(localTimes);
+        tuesdayStart1.setConverter(converter);
+        tuesdayStart1.getItems().addAll(localTimes);
+        tuesdayEnd1.setConverter(converter);
+        tuesdayEnd1.getItems().addAll(localTimes);
+        wednesdayStart1.setConverter(converter);
+        wednesdayStart1.getItems().addAll(localTimes);
+        wednesdayEnd1.setConverter(converter);
+        wednesdayEnd1.getItems().addAll(localTimes);
+        thursdayStart1.setConverter(converter);
+        thursdayStart1.getItems().addAll(localTimes);
+        thursdayEnd1.setConverter(converter);
+        thursdayEnd1.getItems().addAll(localTimes);
+        fridayStart1.setConverter(converter);
+        fridayStart1.getItems().addAll(localTimes);
+        fridayEnd1.setConverter(converter);
+        fridayEnd1.getItems().addAll(localTimes);
+        
+        //** why is this null? **
         mondayStart.getItems().add(null);
     }
 
@@ -173,11 +220,24 @@ public class CreateController implements Initializable {
             lectureDayTimes.put(DayOfWeek.THURSDAY, new LectureTime(thursdayStart.getValue(), thursdayEnd.getValue()));
         if (fridayStart.getValue() != null && fridayEnd.getValue() != null)
             lectureDayTimes.put(DayOfWeek.FRIDAY, new LectureTime(fridayStart.getValue(), fridayEnd.getValue()));
-
+        
+        HashMap<DayOfWeek,RecitationTime> recitationTimes = new HashMap<DayOfWeek,RecitationTime>();
+        if (mondayStart1.getValue() != null && mondayEnd1.getValue() != null)
+        	recitationTimes.put(DayOfWeek.MONDAY, new RecitationTime(mondayStart1.getValue(), mondayEnd1.getValue()));
+        if (tuesdayStart1.getValue() != null && tuesdayEnd1.getValue() != null)
+        	recitationTimes.put(DayOfWeek.TUESDAY, new RecitationTime(tuesdayStart1.getValue(), tuesdayEnd1.getValue()));
+        if (wednesdayStart1.getValue() != null && wednesdayEnd1.getValue() != null)
+        	recitationTimes.put(DayOfWeek.WEDNESDAY, new RecitationTime(wednesdayStart1.getValue(), wednesdayEnd1.getValue()));
+        if (thursdayStart1.getValue() != null && thursdayEnd1.getValue() != null)
+        	recitationTimes.put(DayOfWeek.THURSDAY, new RecitationTime(thursdayStart1.getValue(), thursdayEnd1.getValue()));
+        if (fridayStart1.getValue() != null && fridayEnd1.getValue() != null)
+        	recitationTimes.put(DayOfWeek.FRIDAY, new RecitationTime(fridayStart1.getValue(), fridayEnd1.getValue()));
+ 
         String subject = courseSubject.getText().strip();
         String number = courseNumber.getText().strip();
         String sem = semester.getValue().strip().toUpperCase();
         String yr = year.getText().strip();
+        
         if (subject.isBlank() || number.isBlank() || yr.isBlank()) {
             warning.setText("Fill out all fields marked with '*'");
         } else if (getDatabase().getSyllabye().containsKey(subject + number + sem + yr)) {
@@ -188,7 +248,7 @@ public class CreateController implements Initializable {
                 Syllabus s = new Syllabus(courseName.getText().strip(), Integer.parseInt(number),
                         subject, professorName.getText().strip(), Semester.valueOf(sem),
                         Integer.parseInt(yr), location.getText().strip(),
-                        professorEmail.getText().strip(), extraCredit.getValue().equals("Yes"), lectureDayTimes);
+                        professorEmail.getText().strip(), extraCredit.getValue().equals("Yes"), lectureDayTimes, recitationTimes);
                 warning.setText("");
                 getDatabase().add(s);
                 getDatabase().writeSyllabye();

@@ -14,11 +14,12 @@ public class Syllabus {
     private String professorEmail;
     private boolean extraCredit;
     private HashMap<DayOfWeek,LectureTime> lectureDayTimes;
+    private HashMap<DayOfWeek,RecitationTime> recitationTimes;
 
     public Syllabus(String courseName, int courseNumber, String courseSubject, 
             String professorName, Semester semester, int year, String location,
             String professorEmail, boolean extraCredit, 
-            HashMap<DayOfWeek,LectureTime> lectureDayTimes) {
+            HashMap<DayOfWeek,LectureTime> lectureDayTimes, HashMap<DayOfWeek, RecitationTime> recitationTimes) {
         this.setCourseName(courseName);
         this.setCourseNumber(courseNumber);
         this.setCourseSubject(courseSubject);
@@ -29,6 +30,7 @@ public class Syllabus {
         this.setProfessorEmail(professorEmail);
         this.setExtraCredit(extraCredit);
         this.setLectureDayTimes(lectureDayTimes);
+        this.setRecitationTimes(recitationTimes);
     }
 
     public String getCourseName() {
@@ -116,5 +118,13 @@ public class Syllabus {
 
     public void setLectureDayTimes(HashMap<DayOfWeek,LectureTime> lectures) {
         this.lectureDayTimes = lectures;
+    }
+    
+    public HashMap<DayOfWeek,RecitationTime> getRecitationTimes() {
+    	return recitationTimes;
+    }
+    
+    public void setRecitationTimes(HashMap<DayOfWeek,RecitationTime> recitations) {
+    	this.recitationTimes = recitations;
     }
 }
