@@ -4,7 +4,6 @@ import application.model.Syllabus;
 import application.model.Semester;
 import application.model.Database;
 import application.model.LectureTime;
-import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.time.DayOfWeek;
