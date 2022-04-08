@@ -1,13 +1,20 @@
 package application.controller;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Iterator;
 
 import application.model.SortSyllabye;
 import application.model.Syllabus;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 public class ViewController {
 	@FXML
@@ -49,7 +56,16 @@ public class ViewController {
 		else
 			return content;
 	}
-	 
+	
+	@FXML
+    public void goSelection(ActionEvent event) throws IOException {
+    	//note: nothing will save when the user presses the home button
+    	Parent root = FXMLLoader.load(getClass().getResource("/fxml/selectionPage.fxml"));
+    	Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+    	stage.setScene(new Scene(root));
+    	stage.show();
+    }
+	
 	@FXML
 	public void springInfo() {
 		sprText.setVisible(true);
