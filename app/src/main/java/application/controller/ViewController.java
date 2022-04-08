@@ -1,14 +1,17 @@
 package application.controller;
 
 import java.io.IOException;
+import java.net.URL;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.ResourceBundle;
 
 import application.model.SortSyllabye;
 import application.model.Syllabus;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -16,7 +19,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-public class ViewController {
+public class ViewController implements Initializable {
 	@FXML
 	private TextArea fallText;
 	@FXML
@@ -37,11 +40,18 @@ public class ViewController {
 	private TextField winYr;
 	@FXML
 	private TextField mayYr;
-	 
+	
 	private static SortSyllabye ss;
+	private static HashMap<String, Syllabus> sb;
+
 	 
 	public static void setSyllabye (HashMap<String,Syllabus> syllabye) {
-		ss = new SortSyllabye(syllabye);
+		sb = syllabye;
+	}
+	
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		ss = new SortSyllabye(sb);	
 	}
 	
 	public String iterate(Iterator<Syllabus> s) {
@@ -106,4 +116,6 @@ public class ViewController {
 		Iterator<Syllabus> s = ss.getWinter().iterator();
 		winText.setText(iterate(s));
 	}
+
+	
 }
