@@ -255,7 +255,7 @@ public class CreateController implements Initializable {
                 // Go back to SelectionPage scene
                 // TODO this "switchScene" logic is repeated in many places
                 // Should we make all controller classes inherit from an abstract "Controller" class?
-                Parent root = FXMLLoader.load(getClass().getResource("/fxml/selectionPage.fxml"));
+                Parent root = FXMLLoader.load(getClass().getResource("/fxml/SelectionPage.fxml"));
                 Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
                 stage.setScene(new Scene(root));
                 stage.show();
@@ -268,7 +268,7 @@ public class CreateController implements Initializable {
     @FXML
     public void goHome(ActionEvent event) throws IOException {
     	//note: nothing will save when the user presses the home button
-    	Parent root = FXMLLoader.load(getClass().getResource("/fxml/selectionPage.fxml"));
+    	Parent root = FXMLLoader.load(getClass().getResource("/fxml/SelectionPage.fxml"));
     	Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
     	stage.setScene(new Scene(root));
     	stage.show();
