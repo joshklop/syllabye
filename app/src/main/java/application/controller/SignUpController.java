@@ -75,6 +75,15 @@ public class SignUpController implements Initializable {
             stage.show();
         }
     }
+    
+    @FXML
+    public void clickedHome(ActionEvent event) throws IOException {
+    	root = FXMLLoader.load(getClass().getResource("/fxml/LoginPage.fxml"));
+        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
