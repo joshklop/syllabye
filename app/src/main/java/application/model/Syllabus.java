@@ -1,6 +1,8 @@
 package application.model;
 
 import java.time.DayOfWeek;
+import java.time.format.DateTimeFormatter;
+import java.util.Arrays;
 import java.util.HashMap;
 
 public class Syllabus {
@@ -107,8 +109,34 @@ public class Syllabus {
     
     public String toString() {
     	String content = courseName + " (" + courseSubject + courseNumber + ")\nProfessor: " + professorName
-    			+ "\t\tEmail: " + professorEmail + "\nLocation: " + location
-    			+ (extraCredit ? "\nExtra credit is available for this class\n": "\nNo Extra Credit is available for this class\n");
+    			+ "\t\tEmail: " + professorEmail + "\nLocation: " + location + "\n";
+    	content += "\tLecture:\n";
+    	Object[] keySet = lectureDayTimes.keySet().toArray();
+    	Arrays.sort(keySet);
+    	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("h:mma");
+    	for (Object d : keySet) {
+    		String t1 = lectureDayTimes.get(d).getStart().format(formatter);
+    		String t2 = lectureDayTimes.get(d).getEnd().format(formatter);
+    		content += "\t\t" + ((DayOfWeek) d).name().substring(0,1).toUpperCase() + ((DayOfWeek) d).name().substring(1).toLowerCase() + " - "; 
+    		content += t1 + " to " + t2 + "\n";
+
+    	}
+    	content += "\tRecitation:\n";
+    	if (recitationTimes.isEmpty())
+    		content += "\t\tNo recitation for this course\n";
+    	else {
+    		keySet = recitationTimes.keySet().toArray();
+        	Arrays.sort(keySet);
+        	formatter = DateTimeFormatter.ofPattern("h:mma");
+        	for (Object d : keySet) {
+        		String t1 = recitationTimes.get(d).getRecitationStart().format(formatter);
+        		String t2 = recitationTimes.get(d).getRecitationEnd().format(formatter);
+        		content += "\t\t" + ((DayOfWeek) d).name().substring(0,1).toUpperCase() + ((DayOfWeek) d).name().substring(1).toLowerCase() + " - "; 
+        		content += t1 + " to " + t2 + "\n";
+
+        	}
+    	}
+    	content += (extraCredit ? "Extra credit is available for this class\n": "No Extra Credit is available for this class\n");
     	return content;
     }
 
