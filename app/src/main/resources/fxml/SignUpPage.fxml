@@ -31,7 +31,7 @@
             <Font size="26.0" />
          </font>
       </Label>
-      <Button layoutX="574.0" layoutY="263.0" mnemonicParsing="false" onAction="#switchToLoginScene" prefHeight="35.0" prefWidth="158.0" style="-fx-background-radius: 20; -fx-focus-traversable: false;" text="Register">
+      <Button layoutX="574.0" layoutY="228.0" mnemonicParsing="false" onAction="#switchToLoginScene" prefHeight="35.0" prefWidth="158.0" style="-fx-background-radius: 20; -fx-focus-traversable: false;" text="Register">
          <font>
             <Font size="18.0" />
          </font>
@@ -59,5 +59,10 @@
       </Label>
       <TextField fx:id="securityQuesAns" layoutX="202.0" layoutY="418.0" prefHeight="27.0" prefWidth="217.0" style="-fx-focus-traversable: false;" />
       <Label fx:id="warning" alignment="CENTER" layoutX="549.0" layoutY="178.0" prefHeight="50.0" prefWidth="193.0" textFill="#eb0808" />
+      <Button layoutX="574.0" layoutY="281.0" mnemonicParsing="false" onAction="#clickedHome" prefHeight="35.0" prefWidth="158.0" style="-fx-background-radius: 20; -fx-focus-traversable: false;" text="Cancel">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>
