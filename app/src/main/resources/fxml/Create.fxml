@@ -7,6 +7,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -14,18 +15,11 @@
 <?import javafx.scene.text.Font?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="678.0" prefWidth="886.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.CreateController">
-   <top>
-      <Label prefHeight="35.0" prefWidth="199.0" text="Add Syllabus" translateY="-5.0" BorderPane.alignment="CENTER">
-         <font>
-            <Font size="35.0" />
-         </font>
-      </Label>
-   </top>
    <padding>
       <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
    </padding>
    <bottom>
-      <GridPane alignment="CENTER" prefHeight="31.0" prefWidth="845.0" BorderPane.alignment="CENTER">
+      <GridPane alignment="CENTER" prefHeight="29.0" prefWidth="813.0" BorderPane.alignment="CENTER">
          <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" />
          </columnConstraints>
@@ -34,20 +28,19 @@
          </rowConstraints>
          <children>
             <Button fx:id="save" mnemonicParsing="false" onAction="#onSave" text="Save" textFill="#030303" GridPane.halignment="CENTER" />
-            <Button fx:id="home" mnemonicParsing="false" onAction="#goHome" text="Home" GridPane.halignment="RIGHT" />
             <Label fx:id="warning" textFill="RED" translateZ="15.0" />
          </children>
       </GridPane>
    </bottom>
    <left>
-      <ScrollPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="567.0" prefWidth="866.0" BorderPane.alignment="CENTER">
+      <ScrollPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="584.0" prefWidth="782.0" BorderPane.alignment="CENTER">
          <content>
-            <BorderPane prefHeight="703.0" prefWidth="847.0">
+            <BorderPane prefHeight="703.0" prefWidth="699.0">
                <top>
                   <GridPane alignment="CENTER" prefHeight="627.0" prefWidth="749.0" scaleShape="false" BorderPane.alignment="CENTER">
                      <columnConstraints>
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="283.0" minWidth="10.0" prefWidth="142.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="699.0" minWidth="10.0" prefWidth="688.0" />
+                        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="283.0" minWidth="10.0" prefWidth="158.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="699.0" minWidth="10.0" prefWidth="541.0" />
                      </columnConstraints>
                      <rowConstraints>
                         <RowConstraints maxHeight="58.0" minHeight="10.0" prefHeight="58.0" vgrow="SOMETIMES" />
@@ -63,7 +56,7 @@
                         <RowConstraints maxHeight="222.0" minHeight="10.0" prefHeight="94.0" vgrow="SOMETIMES" />
                      </rowConstraints>
                      <children>
-                        <TextField fx:id="courseSubject" promptText="CS" GridPane.columnIndex="1" />
+                        <TextField fx:id="courseSubject" prefHeight="26.0" prefWidth="594.0" promptText="CS" GridPane.columnIndex="1" />
                         <TextField fx:id="courseNumber" promptText="3343" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                         <ChoiceBox fx:id="semester" prefWidth="150.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
                         <TextField fx:id="year" promptText="2022" GridPane.columnIndex="1" GridPane.rowIndex="3" />
@@ -72,52 +65,55 @@
                         <TextField fx:id="professorName" promptText="John Doe" GridPane.columnIndex="1" GridPane.rowIndex="6" />
                         <TextField fx:id="professorEmail" promptText="john.doe@university.edu" GridPane.columnIndex="1" GridPane.rowIndex="7" />
                         <ChoiceBox fx:id="extraCredit" prefWidth="150.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="8" />
-                        <Label text="Course Subject*" GridPane.halignment="CENTER">
+                        <Label prefHeight="22.0" prefWidth="145.0" text="Course Subject*" GridPane.halignment="LEFT">
+                           <font>
+                              <Font size="17.0" />
+                           </font>
+                           <GridPane.margin>
+                              <Insets />
+                           </GridPane.margin>
+                        </Label>
+                        <Label text="Course Number*" GridPane.halignment="LEFT" GridPane.rowIndex="1">
                            <font>
                               <Font size="17.0" />
                            </font>
                         </Label>
-                        <Label text="Course Number*" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+                        <Label text="Course Name" GridPane.halignment="LEFT" GridPane.rowIndex="4">
                            <font>
                               <Font size="17.0" />
                            </font>
                         </Label>
-                        <Label text="Course Name" GridPane.halignment="CENTER" GridPane.rowIndex="4">
+                        <Label text="Professor Name" GridPane.halignment="LEFT" GridPane.rowIndex="6">
                            <font>
                               <Font size="17.0" />
                            </font>
                         </Label>
-                        <Label text="Professor Name" GridPane.halignment="CENTER" GridPane.rowIndex="6">
+                        <Label text="Year*" GridPane.halignment="LEFT" GridPane.rowIndex="3">
                            <font>
                               <Font size="17.0" />
                            </font>
                         </Label>
-                        <Label text="Year*" GridPane.halignment="CENTER" GridPane.rowIndex="3">
+                        <Label text="Semester*" GridPane.halignment="LEFT" GridPane.rowIndex="2">
                            <font>
                               <Font size="17.0" />
                            </font>
                         </Label>
-                        <Label text="Semester*" GridPane.halignment="CENTER" GridPane.rowIndex="2">
+                        <Label text="Professor Email" GridPane.halignment="LEFT" GridPane.rowIndex="7">
                            <font>
                               <Font size="17.0" />
                            </font>
                         </Label>
-                        <Label text="Professor Email" GridPane.halignment="CENTER" GridPane.rowIndex="7">
+                        <Label text="Location" GridPane.halignment="LEFT" GridPane.rowIndex="5">
                            <font>
                               <Font size="17.0" />
                            </font>
                         </Label>
-                        <Label text="Location" GridPane.halignment="CENTER" GridPane.rowIndex="5">
+                        <Label text="Extra Credit" GridPane.halignment="LEFT" GridPane.rowIndex="8">
                            <font>
                               <Font size="17.0" />
                            </font>
                         </Label>
-                        <Label text="Extra Credit" GridPane.halignment="CENTER" GridPane.rowIndex="8">
-                           <font>
-                              <Font size="17.0" />
-                           </font>
-                        </Label>
-                        <Label text="Lecture Days" GridPane.halignment="CENTER" GridPane.rowIndex="9">
+                        <Label text="Lecture Days" GridPane.halignment="LEFT" GridPane.rowIndex="9">
                            <font>
                               <Font size="17.0" />
                            </font>
@@ -156,7 +152,7 @@
                               <ComboBox fx:id="fridayEnd" prefWidth="150.0" visibleRowCount="15" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
                            </children>
                         </GridPane>
-                        <Label layoutX="57.0" layoutY="362.0" text="Recitations" GridPane.halignment="CENTER" GridPane.rowIndex="10">
+                        <Label layoutX="57.0" layoutY="362.0" text="Recitations" GridPane.halignment="LEFT" GridPane.rowIndex="10">
                            <font>
                               <Font size="17.0" />
                            </font>
@@ -196,10 +192,25 @@
                            </children>
                         </GridPane>
                      </children>
+                     <padding>
+                        <Insets left="20.0" />
+                     </padding>
                   </GridPane>
                </top>
             </BorderPane>
          </content>
       </ScrollPane>
    </left>
+   <top>
+      <AnchorPane prefHeight="44.0" prefWidth="766.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button fx:id="home" layoutX="697.0" layoutY="9.0" mnemonicParsing="false" onAction="#goHome" prefHeight="26.0" prefWidth="62.0" text="Home" />
+            <Label alignment="CENTER" layoutX="345.0" layoutY="8.0" prefHeight="28.0" prefWidth="137.0" text="Add Syllabus">
+               <font>
+                  <Font name="System Bold" size="23.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+   </top>
 </BorderPane>
