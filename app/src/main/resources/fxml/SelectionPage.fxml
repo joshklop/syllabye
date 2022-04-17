@@ -23,6 +23,6 @@
             <Font size="35.0" />
          </font></Button>
       <Button layoutX="190.0" layoutY="29.0" mnemonicParsing="false" onAction="#logout" prefHeight="35.0" prefWidth="156.0" text="Sign Out" />
-      <Button layoutX="447.0" layoutY="29.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="156.0" text="Schedule" />
+      <Button layoutX="447.0" layoutY="29.0" mnemonicParsing="false" onAction="#switchToSchedule" prefHeight="35.0" prefWidth="156.0" text="Schedule" />
    </children>
 </AnchorPane>
