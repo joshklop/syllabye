@@ -22,7 +22,7 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/fxml/LoginPage.fxml"));
-        Scene scene = new Scene(root);
+        Scene scene = new Scene(root, 800, 800);
         primaryStage.setScene(scene);
         primaryStage.setTitle("Syllabye");
         primaryStage.show();

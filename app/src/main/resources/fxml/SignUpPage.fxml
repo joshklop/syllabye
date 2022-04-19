@@ -6,63 +6,70 @@
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="526.0" prefWidth="779.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.SignUpController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.SignUpController">
    <children>
-      <TextField fx:id="firstName" layoutX="30.0" layoutY="116.0" prefHeight="35.0" prefWidth="217.0" promptText="First Name" style="-fx-focus-traversable: false;">
+      <TextField fx:id="firstName" layoutX="45.0" layoutY="158.0" prefHeight="35.0" prefWidth="514.0" promptText="First Name" style="-fx-focus-traversable: false;">
          <font>
             <Font size="16.0" />
          </font></TextField>
-      <TextField fx:id="email" layoutX="30.0" layoutY="193.0" prefHeight="35.0" prefWidth="217.0" promptText="Email Address" style="-fx-focus-traversable: false;">
+      <TextField fx:id="email" layoutX="45.0" layoutY="279.0" prefHeight="35.0" prefWidth="514.0" promptText="Email Address" style="-fx-focus-traversable: false;">
          <font>
             <Font size="16.0" />
          </font></TextField>
-      <TextField fx:id="lastName" layoutX="298.0" layoutY="116.0" prefHeight="35.0" prefWidth="217.0" promptText="Last Name" style="-fx-focus-traversable: false;">
+      <TextField fx:id="lastName" layoutX="45.0" layoutY="221.0" prefHeight="35.0" prefWidth="514.0" promptText="Last Name" style="-fx-focus-traversable: false;">
          <font>
             <Font size="16.0" />
          </font></TextField>
-      <TextField fx:id="userName" layoutX="298.0" layoutY="193.0" prefHeight="35.0" prefWidth="217.0" promptText="Username" style="-fx-focus-traversable: false;">
+      <TextField fx:id="userName" layoutX="45.0" layoutY="347.0" prefHeight="35.0" prefWidth="514.0" promptText="Username" style="-fx-focus-traversable: false;">
          <font>
             <Font size="16.0" />
          </font></TextField>
-      <Label alignment="CENTER" layoutX="281.0" layoutY="33.0" prefHeight="50.0" prefWidth="217.0" text="Create an account">
+      <Label alignment="CENTER" layoutX="16.0" layoutY="24.0" prefHeight="64.0" prefWidth="246.0" text="Create an account">
          <font>
-            <Font size="26.0" />
+            <Font size="29.0" />
          </font>
       </Label>
-      <Button layoutX="574.0" layoutY="228.0" mnemonicParsing="false" onAction="#switchToLoginScene" prefHeight="35.0" prefWidth="158.0" style="-fx-background-radius: 20; -fx-focus-traversable: false;" text="Register">
+      <Button layoutX="593.0" layoutY="358.0" mnemonicParsing="false" onAction="#switchToLoginScene" prefHeight="35.0" prefWidth="158.0" style="-fx-background-radius: 20; -fx-focus-traversable: false;" text="Register">
          <font>
             <Font size="18.0" />
          </font>
       </Button>
-      <PasswordField fx:id="password" layoutX="30.0" layoutY="263.0" prefHeight="35.0" prefWidth="217.0" promptText="Password" style="-fx-focus-traversable: false;">
+      <PasswordField fx:id="password" layoutX="45.0" layoutY="412.0" prefHeight="35.0" prefWidth="514.0" promptText="Password" style="-fx-focus-traversable: false;">
          <font>
             <Font size="16.0" />
          </font>
       </PasswordField>
-      <PasswordField fx:id="confirmPass" layoutX="298.0" layoutY="263.0" prefHeight="35.0" prefWidth="217.0" promptText="Confirm Password" style="-fx-focus-traversable: false;">
+      <PasswordField fx:id="confirmPass" layoutX="45.0" layoutY="474.0" prefHeight="35.0" prefWidth="514.0" promptText="Confirm Password" style="-fx-focus-traversable: false;">
          <font>
             <Font size="16.0" />
          </font>
       </PasswordField>
-      <ChoiceBox fx:id="securityQuestions" focusTraversable="false" layoutX="202.0" layoutY="349.0" prefHeight="35.0" prefWidth="335.0" />
-      <Label alignment="CENTER" layoutX="30.0" layoutY="353.0" prefHeight="27.0" prefWidth="151.0" text="Security Question" textFill="#544b4b">
+      <ChoiceBox fx:id="securityQuestions" focusTraversable="false" layoutX="45.0" layoutY="571.0" prefHeight="35.0" prefWidth="602.0" />
+      <Label alignment="CENTER" layoutX="45.0" layoutY="538.0" prefHeight="27.0" prefWidth="151.0" text="Security Question" textFill="#544b4b">
          <font>
             <Font size="19.0" />
          </font>
       </Label>
-      <Label alignment="CENTER" layoutX="30.0" layoutY="418.0" prefHeight="27.0" prefWidth="151.0" text="Answer" textFill="#544b4b">
+      <Label alignment="CENTER" layoutX="26.0" layoutY="638.0" prefHeight="27.0" prefWidth="117.0" text="Answer" textFill="#544b4b">
          <font>
             <Font size="19.0" />
          </font>
       </Label>
-      <TextField fx:id="securityQuesAns" layoutX="202.0" layoutY="418.0" prefHeight="27.0" prefWidth="217.0" style="-fx-focus-traversable: false;" />
-      <Label fx:id="warning" alignment="CENTER" layoutX="549.0" layoutY="178.0" prefHeight="50.0" prefWidth="193.0" textFill="#eb0808" />
-      <Button layoutX="574.0" layoutY="281.0" mnemonicParsing="false" onAction="#clickedHome" prefHeight="35.0" prefWidth="158.0" style="-fx-background-radius: 20; -fx-focus-traversable: false;" text="Cancel">
+      <TextField fx:id="securityQuesAns" layoutX="45.0" layoutY="672.0" prefHeight="35.0" prefWidth="602.0" style="-fx-focus-traversable: false;" />
+      <Label fx:id="warning" alignment="CENTER" layoutX="575.0" layoutY="237.0" prefHeight="50.0" prefWidth="193.0" textFill="#eb0808" />
+      <Button layoutX="593.0" layoutY="429.0" mnemonicParsing="false" onAction="#clickedHome" prefHeight="35.0" prefWidth="158.0" style="-fx-background-radius: 20; -fx-focus-traversable: false;" text="Cancel">
          <font>
             <Font size="18.0" />
          </font>
       </Button>
+      <Label layoutX="38.0" layoutY="101.0" prefHeight="26.0" prefWidth="514.0" text="Please enter the following information to create your account. " textFill="#aeaeae">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Line endX="671.0" layoutX="119.0" layoutY="87.0" startX="-93.0" stroke="#2ea7d7" />
    </children>
 </AnchorPane>
