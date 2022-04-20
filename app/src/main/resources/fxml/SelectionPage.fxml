@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="526.0" prefWidth="779.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.SelectionController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="526.0" prefWidth="779.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.SelectionController">
    <children>
       <Button layoutX="168.0" layoutY="306.0" mnemonicParsing="false" prefHeight="200.0" prefWidth="200.0" style="-fx-background-radius: 100; -fx-background-color: green;" text="Update" textFill="WHITE">
          <font>
@@ -23,6 +23,6 @@
             <Font size="35.0" />
          </font></Button>
       <Button layoutX="190.0" layoutY="29.0" mnemonicParsing="false" onAction="#logout" prefHeight="35.0" prefWidth="156.0" text="Sign Out" />
-      <Button layoutX="447.0" layoutY="29.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="156.0" text="Schedule" />
+      <Button fx:id="schedule" layoutX="447.0" layoutY="29.0" mnemonicParsing="false" onAction="#switchToScheduleScene" prefHeight="35.0" prefWidth="156.0" text="Schedule" />
    </children>
 </AnchorPane>

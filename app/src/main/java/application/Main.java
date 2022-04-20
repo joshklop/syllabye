@@ -9,6 +9,7 @@ import javafx.stage.Stage;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 
+import application.controller.ScheduleController;
 import application.controller.LoginController;
 import application.controller.SignUpController;
 import application.controller.ViewController;
@@ -34,6 +35,7 @@ public class Main extends Application {
             db.resetSyllabye();
         CreateController.setDatabase(db);
         ViewController.setSyllabye(db.getSyllabye());
+        ScheduleController.setDatabase(db);
         Accounts ac = new Accounts();
         SignUpController.setAccounts(ac);
         LoginController.setAccounts(ac);
