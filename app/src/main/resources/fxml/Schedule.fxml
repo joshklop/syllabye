@@ -36,7 +36,7 @@
             <Label styleClass="dayOfWeekLabel" stylesheets="@../style/schedule.css" text="Friday" GridPane.columnIndex="4" GridPane.halignment="CENTER" />
          </children>
       </GridPane>
-      <ComboBox fx:id="semesterComboBox" layoutX="392.0" layoutY="21.0" onAction="#selectSemester" prefWidth="150.0" promptText="Semester" />
+      <ComboBox fx:id="semesterComboBox" layoutX="392.0" layoutY="21.0" prefWidth="150.0" promptText="Semester" />
       <Button fx:id="homeButton" layoutX="32.0" layoutY="21.0" mnemonicParsing="false" onAction="#goToSelectionPage" text="Home" />
    </children>
 </AnchorPane>
