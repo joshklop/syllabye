@@ -286,7 +286,17 @@ public class CreateController implements Initializable {
             thursdayEnd.setItems(thursdayEnd.getItems().filtered(time -> time.isAfter(thursdayStart.getValue())));
         if (fridayStart.getValue() != null)
             fridayEnd.setItems(fridayEnd.getItems().filtered(time -> time.isAfter(fridayStart.getValue())));
-        // TODO do the same in reverse for dayEnd comboboxes
+
+        if (mondayStart1.getValue() != null)
+            mondayEnd1.setItems(mondayEnd1.getItems().filtered(time -> time.isAfter(mondayStart1.getValue())));
+        if (tuesdayStart1.getValue() != null)
+            tuesdayEnd1.setItems(tuesdayEnd1.getItems().filtered(time -> time.isAfter(tuesdayStart1.getValue())));
+        if (wednesdayStart1.getValue() != null)
+            wednesdayEnd1.setItems(wednesdayEnd1.getItems().filtered(time -> time.isAfter(wednesdayStart1.getValue())));
+        if (thursdayStart1.getValue() != null)
+            thursdayEnd1.setItems(thursdayEnd1.getItems().filtered(time -> time.isAfter(thursdayStart1.getValue())));
+        if (fridayStart1.getValue() != null)
+            fridayEnd1.setItems(fridayEnd1.getItems().filtered(time -> time.isAfter(fridayStart1.getValue())));
     }
 
     public static Database getDatabase() {
