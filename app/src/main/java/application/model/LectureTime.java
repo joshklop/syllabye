@@ -1,8 +1,9 @@
 package application.model;
 
 import java.time.LocalTime;
+import java.io.Serializable;
 
-public class LectureTime {
+public class LectureTime implements Serializable {
     private LocalTime start;
     private LocalTime end;
 

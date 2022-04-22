@@ -4,8 +4,9 @@ import java.time.DayOfWeek;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.io.Serializable;
 
-public class Syllabus {
+public class Syllabus implements Serializable {
     private String courseName;
     private int courseNumber;
     private String courseSubject;
