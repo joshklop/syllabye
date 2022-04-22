@@ -13,6 +13,7 @@ import application.controller.LoginController;
 import application.controller.SignUpController;
 import application.controller.ViewController;
 import application.controller.CreateController;
+import application.controller.ForgotPasswordController;
 import application.model.Database;
 import application.model.Accounts;
 
@@ -37,6 +38,7 @@ public class Main extends Application {
         Accounts ac = new Accounts();
         SignUpController.setAccounts(ac);
         LoginController.setAccounts(ac);
+        ForgotPasswordController.setAccounts(ac); //New Code
         launch(args);
     }
 }

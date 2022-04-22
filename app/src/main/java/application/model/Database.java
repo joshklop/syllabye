@@ -43,7 +43,7 @@ public class Database {
     public void writeSyllabye() throws IOException {
         BufferedWriter bw = null;
         bw = new BufferedWriter(new FileWriter(file.getPath()));
-        bw.write(gson.toJson(syllabye, syllabyeType).toString()); 
+        bw.write(gson.toJson(syllabye, syllabyeType).toString());
         bw.close();
     }
 

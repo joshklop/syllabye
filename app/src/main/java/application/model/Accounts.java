@@ -90,4 +90,49 @@ public class Accounts {
         }
         return false;
     }
+    
+    public boolean isPasswordRecoveryAccountValid(String userName, String email, String securityAnswer) {
+    	String userN;
+    	String eml;
+    	String sAns;
+    	
+    	for (int i = 0; i < profiles.size(); i++) {
+    		userN = profiles.get(i).getUserName();
+    		eml = profiles.get(i).getEmail();
+    		sAns = profiles.get(i).getSecurityQuesAns();
+    		if (userN.equals(userName)) {
+    			if (eml.equals(email)) {
+    				if (sAns.equals(securityAnswer)) {
+    					return true;
+    				}
+    				else {
+    					return false;
+    				}
+    			}
+    		}
+    	}
+    	return false;
+    }
+    
+    //@Override
+    public void changePassword(String userName, String email, String securityAnswer, String password) {
+    	String userN;
+    	String eml;
+    	String sAns;
+    	
+    	for (int i = 0; i < profiles.size(); i++) {
+    		userN = profiles.get(i).getUserName();
+    		eml = profiles.get(i).getEmail();
+    		sAns = profiles.get(i).getSecurityQuesAns();
+    		if (userN.equals(userName)) {
+    			if (eml.equals(email)) {
+    				if (sAns.equals(securityAnswer)) {
+    					profiles.get(i).setPassword(password);
+    					//read from initialize method, and override it.
+    					
+    				}
+    			}
+    		}
+    	}
+    }
 }
