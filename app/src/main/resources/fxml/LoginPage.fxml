@@ -9,23 +9,38 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="526.0" prefWidth="779.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.LoginController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.LoginController">
    <children>
-      <Label alignment="CENTER" layoutX="328.0" layoutY="51.0" prefHeight="72.0" prefWidth="119.0" text="Syllabye" underline="true">
+      <Label alignment="CENTER" layoutX="337.0" layoutY="148.0" prefHeight="72.0" prefWidth="119.0" text="Syllabye" underline="true">
          <font>
             <Font size="30.0" />
          </font>
       </Label>
-      <TextField fx:id="userName" layoutX="277.0" layoutY="150.0" prefHeight="37.0" prefWidth="225.0" promptText="Username" style="-fx-focus-traversable: false;" />
-      <PasswordField fx:id="password" layoutX="277.0" layoutY="218.0" prefHeight="37.0" prefWidth="225.0" promptText="Password" style="-fx-focus-traversable: false;" />
-      <Hyperlink layoutX="277.0" layoutY="263.0" onAction="#switchToForgotPasswordScene" prefHeight="23.0" prefWidth="95.0" style="-fx-focus-traversable: false;" text="Forgot password?" underline="true">
+      <TextField fx:id="userName" layoutX="263.0" layoutY="254.0" prefHeight="46.0" prefWidth="286.0" promptText="Username" style="-fx-focus-traversable: false; -fx-background-radius: 5;">
          <font>
-            <Font size="10.0" />
+            <Font size="16.0" />
+         </font></TextField>
+      <PasswordField fx:id="password" layoutX="264.0" layoutY="335.0" prefHeight="45.0" prefWidth="286.0" promptText="Password" style="-fx-focus-traversable: false; -fx-background-radius: 5;">
+         <font>
+            <Font size="16.0" />
+         </font></PasswordField>
+      <Hyperlink layoutX="275.0" layoutY="397.0" onAction="#switchToForgotPasswordScene" prefHeight="23.0" prefWidth="100.0" style="-fx-focus-traversable: false;" text="Forgot password?" underline="true">
+         <font>
+            <Font size="12.0" />
          </font>
       </Hyperlink>
-      <Button layoutX="301.0" layoutY="310.0" mnemonicParsing="false" onAction="#switchToSelectionScene" prefHeight="37.0" prefWidth="183.0" style="-fx-background-radius: 20; -fx-focus-traversable: false;" text="Login" />
-      <Text layoutX="330.0" layoutY="393.0" opacity="0.4" strokeType="OUTSIDE" strokeWidth="0.0" text="New user?" />
-      <Hyperlink layoutX="393.0" layoutY="377.0" onAction="#switchToSignUpScene" style="-fx-border-style: none; -fx-focus-traversable: false;" text="Register" textFill="#ff7200" visited="true" />
-      <Label fx:id="warning" alignment="CENTER" layoutX="277.0" layoutY="123.0" prefHeight="17.0" prefWidth="225.0" textFill="RED" />
+      <Button layoutX="321.0" layoutY="435.0" mnemonicParsing="false" onAction="#switchToSelectionScene" prefHeight="38.0" prefWidth="201.0" style="-fx-background-radius: 16; -fx-focus-traversable: false;" text="Login">
+         <font>
+            <Font size="17.0" />
+         </font></Button>
+      <Text layoutX="361.0" layoutY="504.0" opacity="0.4" strokeType="OUTSIDE" strokeWidth="0.0" text="New user?" wrappingWidth="64.81207275390625">
+         <font>
+            <Font size="14.0" />
+         </font></Text>
+      <Hyperlink layoutX="422.0" layoutY="483.0" onAction="#switchToSignUpScene" prefHeight="32.0" prefWidth="69.0" style="-fx-border-style: none; -fx-focus-traversable: false;" text="Register" textFill="#ff7200" visited="true">
+         <font>
+            <Font size="14.0" />
+         </font></Hyperlink>
+      <Label fx:id="warning" alignment="CENTER" layoutX="295.0" layoutY="132.0" prefHeight="17.0" prefWidth="225.0" textFill="RED" />
    </children>
 </AnchorPane>
