@@ -19,11 +19,19 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.time.DayOfWeek;
 import javafx.scene.control.Label;
-import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
 
 public class ScheduleController implements Initializable {
     @FXML
-    private GridPane agenda;
+    private VBox mondayBox;
+    @FXML
+    private VBox tuesdayBox;
+    @FXML
+    private VBox wednesdayBox;
+    @FXML
+    private VBox thursdayBox;
+    @FXML
+    private VBox fridayBox;
     private static Database db;
     @FXML
     private ComboBox<String> semesterComboBox;
@@ -51,19 +59,19 @@ public class ScheduleController implements Initializable {
                 for (DayOfWeek d : s.getLectureDayTimes().keySet()) {
                     switch (d) {
                         case MONDAY:
-                            agenda.add(makeLabel(s, d), 0, nextEmptyCell(0));
+                            makeLabel(mondayBox, s, d);
                             break;
                         case TUESDAY:
-                            agenda.add(makeLabel(s, d), 1, nextEmptyCell(1));
+                            makeLabel(tuesdayBox, s, d);
                             break;
                         case WEDNESDAY:
-                            agenda.add(makeLabel(s, d), 2, nextEmptyCell(2));
+                            makeLabel(wednesdayBox, s, d);
                             break;
                         case THURSDAY:
-                            agenda.add(makeLabel(s, d), 3, nextEmptyCell(3));
+                            makeLabel(thursdayBox, s, d);
                             break;
                         case FRIDAY:
-                            agenda.add(makeLabel(s, d), 4, nextEmptyCell(4));
+                            makeLabel(fridayBox, s, d);
                             break;
                     }
                 }
@@ -71,20 +79,12 @@ public class ScheduleController implements Initializable {
         });
     }
 
-    private int nextEmptyCell(int column) {
-        for (int i = column; i < agenda.getColumnCount() * agenda.getRowCount(); i += agenda.getColumnCount()) {
-            System.out.println("hello");
-            System.out.println(agenda.getChildren().get(i));
-            if (agenda.getChildren().get(i).equals(null)) {
-                return i / agenda.getColumnCount();
-            }
-        }
-        // This should overwrite the last item in the column
-        return column * agenda.getRowCount();
-    }
-
-    private Label makeLabel(Syllabus s, DayOfWeek d) {
-        return new Label(s.getCourseSubject() + " " + s.getCourseNumber() + "\n" + s.getLectureDayTimes().get(d));
+    private void makeLabel(VBox box, Syllabus s, DayOfWeek d) {
+        Label l = new Label(s.getCourseSubject() + " " + s.getCourseNumber());
+        l.setPrefWidth(box.getWidth());
+        l.setMinWidth(box.getWidth());
+        l.setMaxWidth(box.getWidth());
+        box.getChildren().add(l);
     }
 
     public void goToSelectionPage(ActionEvent e) throws IOException {
