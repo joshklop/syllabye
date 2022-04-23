@@ -19,7 +19,13 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.time.DayOfWeek;
 import javafx.scene.control.Label;
+import javafx.scene.control.ContentDisplay;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.geometry.Pos;
+import javafx.scene.text.TextAlignment;
+
 
 public class ScheduleController implements Initializable {
     @FXML
@@ -55,35 +61,48 @@ public class ScheduleController implements Initializable {
             }
             // Remove existing labels
             // Add new labels
+            int i = 0;
+            Color[] colors = {Color.RED, Color.BLUE, Color.BLUEVIOLET, Color.DARKCYAN, Color.DARKORANGE, Color.INDIANRED};
             for (Syllabus s : syllabyeBySemester.get(newValue)) {
                 for (DayOfWeek d : s.getLectureDayTimes().keySet()) {
                     switch (d) {
                         case MONDAY:
-                            makeLabel(mondayBox, s, d);
+                            makeLabel(mondayBox, s, d, colors[i]);
                             break;
                         case TUESDAY:
-                            makeLabel(tuesdayBox, s, d);
+                            makeLabel(tuesdayBox, s, d, colors[i]);
                             break;
                         case WEDNESDAY:
-                            makeLabel(wednesdayBox, s, d);
+                            makeLabel(wednesdayBox, s, d, colors[i]);
                             break;
                         case THURSDAY:
-                            makeLabel(thursdayBox, s, d);
+                            makeLabel(thursdayBox, s, d, colors[i]);
                             break;
                         case FRIDAY:
-                            makeLabel(fridayBox, s, d);
+                            makeLabel(fridayBox, s, d, colors[i]);
                             break;
                     }
                 }
+                i++;
             }
+            i = 0;
         });
+        
     }
 
-    private void makeLabel(VBox box, Syllabus s, DayOfWeek d) {
-        Label l = new Label(s.getCourseSubject() + " " + s.getCourseNumber());
+    private void makeLabel(VBox box, Syllabus s, DayOfWeek d, Color c) {
+    	String courseInfo = s.getCourseSubject() + " " + s.getCourseNumber() + " " + s.getCourseName();
+    	box.setSpacing(10);
+    	
+        Label l = new Label(courseInfo);
+        l.setTextFill(c);
+        l.setWrapText(true);
+        l.setContentDisplay(ContentDisplay.CENTER);
+        l.setTextAlignment(TextAlignment.CENTER);
+        l.setAlignment(Pos.CENTER);
+        l.setFont(Font.font(14));
         l.setPrefWidth(box.getWidth());
-        l.setMinWidth(box.getWidth());
-        l.setMaxWidth(box.getWidth());
+       
         box.getChildren().add(l);
     }
 

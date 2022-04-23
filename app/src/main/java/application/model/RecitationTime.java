@@ -1,14 +1,15 @@
 package application.model;
 
 import java.time.LocalTime;
+import java.io.Serializable;
 
-public class RecitationTime {
+public class RecitationTime implements Serializable{
 	private LocalTime start;
 	private LocalTime end;
 
 	public RecitationTime(LocalTime start, LocalTime end) {
-		this.start = start;
-		this.end = end;
+		this.setRecitationStart(start);
+		this.setRecitationEnd(end);
 	}
 	
 	public void setRecitationStart(LocalTime start) {

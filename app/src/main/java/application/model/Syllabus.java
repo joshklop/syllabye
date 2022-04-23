@@ -22,7 +22,7 @@ public class Syllabus implements Serializable {
     public Syllabus(String courseName, int courseNumber, String courseSubject, 
             String professorName, Semester semester, int year, String location,
             String professorEmail, boolean extraCredit, 
-            HashMap<DayOfWeek,LectureTime> lectureDayTimes, HashMap<DayOfWeek, RecitationTime> recitationTimes) {
+            HashMap<DayOfWeek,LectureTime> lectureDayTimes, HashMap<DayOfWeek,RecitationTime> recitationTimes) {
         this.setCourseName(courseName);
         this.setCourseNumber(courseNumber);
         this.setCourseSubject(courseSubject);

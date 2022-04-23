@@ -202,7 +202,7 @@ public class CreateController implements Initializable {
         fridayEnd1.setConverter(converter);
         fridayEnd1.getItems().addAll(localTimes);
         
-        //** why is this null? **
+       
         mondayStart.getItems().add(null);
     }
 
@@ -233,7 +233,7 @@ public class CreateController implements Initializable {
         if (fridayStart1.getValue() != null && fridayEnd1.getValue() != null)
         	recitationTimes.put(DayOfWeek.FRIDAY, new RecitationTime(fridayStart1.getValue(), fridayEnd1.getValue()));
  
-        String subject = courseSubject.getText().strip();
+        String subject = courseSubject.getText().toUpperCase().strip();
         String number = courseNumber.getText().strip();
         String sem = semester.getValue().strip().toUpperCase();
         String yr = year.getText().strip();
