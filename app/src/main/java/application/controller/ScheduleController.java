@@ -25,6 +25,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.geometry.Pos;
 import javafx.scene.text.TextAlignment;
+import java.time.format.DateTimeFormatter;
 
 
 public class ScheduleController implements Initializable {
@@ -59,11 +60,17 @@ public class ScheduleController implements Initializable {
             if (newValue == null || newValue == oldValue) {
                 return;
             }
-            // Remove existing labels
-            // Add new labels
             int i = 0;
             Color[] colors = {Color.RED, Color.BLUE, Color.BLUEVIOLET, Color.DARKCYAN, Color.DARKORANGE, Color.INDIANRED};
             for (Syllabus s : syllabyeBySemester.get(newValue)) {
+                // Remove existing labels
+                removeLabels(mondayBox);
+                removeLabels(tuesdayBox);
+                removeLabels(wednesdayBox);
+                removeLabels(thursdayBox);
+                removeLabels(fridayBox);
+                // TODO sort by day and then start time
+                // Add new labels
                 for (DayOfWeek d : s.getLectureDayTimes().keySet()) {
                     switch (d) {
                         case MONDAY:
@@ -87,14 +94,24 @@ public class ScheduleController implements Initializable {
             }
             i = 0;
         });
-        
+
+    }
+
+    private void removeLabels(VBox box) {
+        if (box.getChildren().size() > 1) {
+            box.getChildren().remove(1, box.getChildren().size());
+        }
     }
 
     private void makeLabel(VBox box, Syllabus s, DayOfWeek d, Color c) {
-    	String courseInfo = s.getCourseSubject() + " " + s.getCourseNumber() + " " + s.getCourseName();
-    	box.setSpacing(10);
-    	
-        Label l = new Label(courseInfo);
+        box.setSpacing(10);
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("h:mma");
+        String startTime = s.getLectureDayTimes().get(d).getStart().format(formatter);
+        String endTime = s.getLectureDayTimes().get(d).getEnd().format(formatter);
+        String text = s.getCourseSubject() + " " + s.getCourseNumber() + " " + s.getCourseName() + "\n" + startTime + "-" + endTime;
+
+        Label l = new Label(text);
         l.setTextFill(c);
         l.setWrapText(true);
         l.setContentDisplay(ContentDisplay.CENTER);
@@ -102,7 +119,7 @@ public class ScheduleController implements Initializable {
         l.setAlignment(Pos.CENTER);
         l.setFont(Font.font(14));
         l.setPrefWidth(box.getWidth());
-       
+
         box.getChildren().add(l);
     }
 
