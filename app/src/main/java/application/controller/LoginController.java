@@ -43,7 +43,7 @@ public class LoginController {
     public void switchToForgotPasswordScene(ActionEvent event ) throws IOException {
         root = FXMLLoader.load(getClass().getResource("/fxml/ForgotPasswordPage.fxml"));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
+        scene = new Scene(root, 800, 800);
         stage.setScene(scene);
         stage.show();
     }

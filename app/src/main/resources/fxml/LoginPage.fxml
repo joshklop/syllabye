@@ -24,20 +24,20 @@
          <font>
             <Font size="16.0" />
          </font></PasswordField>
-      <Hyperlink layoutX="275.0" layoutY="397.0" onAction="#switchToForgotPasswordScene" prefHeight="23.0" prefWidth="100.0" style="-fx-focus-traversable: false;" text="Forgot password?" underline="true">
+      <Hyperlink layoutX="278.0" layoutY="396.0" onAction="#switchToForgotPasswordScene" prefHeight="23.0" prefWidth="100.0" style="-fx-focus-traversable: false;" text="Forgot password?" underline="true">
          <font>
             <Font size="12.0" />
          </font>
       </Hyperlink>
-      <Button layoutX="321.0" layoutY="435.0" mnemonicParsing="false" onAction="#switchToSelectionScene" prefHeight="38.0" prefWidth="201.0" style="-fx-background-radius: 16; -fx-focus-traversable: false;" text="Login">
+      <Button layoutX="312.0" layoutY="435.0" mnemonicParsing="false" onAction="#switchToSelectionScene" prefHeight="38.0" prefWidth="201.0" style="-fx-background-radius: 16; -fx-focus-traversable: false;" text="Login">
          <font>
             <Font size="17.0" />
          </font></Button>
-      <Text layoutX="361.0" layoutY="504.0" opacity="0.4" strokeType="OUTSIDE" strokeWidth="0.0" text="New user?" wrappingWidth="64.81207275390625">
+      <Text layoutX="355.0" layoutY="504.0" opacity="0.4" strokeType="OUTSIDE" strokeWidth="0.0" text="New user?" wrappingWidth="64.81207275390625">
          <font>
             <Font size="14.0" />
          </font></Text>
-      <Hyperlink layoutX="422.0" layoutY="483.0" onAction="#switchToSignUpScene" prefHeight="32.0" prefWidth="69.0" style="-fx-border-style: none; -fx-focus-traversable: false;" text="Register" textFill="#ff7200" visited="true">
+      <Hyperlink layoutX="416.0" layoutY="483.0" onAction="#switchToSignUpScene" prefHeight="32.0" prefWidth="69.0" style="-fx-border-style: none; -fx-focus-traversable: false;" text="Register" textFill="#ff7200" visited="true">
          <font>
             <Font size="14.0" />
          </font></Hyperlink>
