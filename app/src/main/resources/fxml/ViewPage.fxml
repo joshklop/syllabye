@@ -42,7 +42,7 @@
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor></Button>
-                        <BorderPane layoutX="14.0" layoutY="57.0" prefHeight="426.0" prefWidth="750.0">
+                        <BorderPane layoutX="14.0" layoutY="57.0" prefHeight="666.0" prefWidth="774.0">
                            <center>
                               <TextArea fx:id="mayText" prefHeight="432.0" prefWidth="704.0" visible="false" BorderPane.alignment="CENTER" />
                            </center>
@@ -61,7 +61,7 @@
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor></Button>
-                        <BorderPane layoutX="14.0" layoutY="57.0" prefHeight="426.0" prefWidth="750.0">
+                        <BorderPane layoutX="14.0" layoutY="57.0" prefHeight="661.0" prefWidth="773.0">
                            <center>
                               <TextArea fx:id="sumText" prefHeight="432.0" prefWidth="704.0" visible="false" BorderPane.alignment="CENTER" />
                            </center>
@@ -80,7 +80,7 @@
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor></Button>
-                        <BorderPane layoutX="14.0" layoutY="57.0" prefHeight="426.0" prefWidth="750.0">
+                        <BorderPane layoutX="14.0" layoutY="57.0" prefHeight="661.0" prefWidth="773.0">
                            <center>
                               <TextArea fx:id="fallText" prefHeight="432.0" prefWidth="704.0" visible="false" BorderPane.alignment="CENTER" />
                            </center>
@@ -99,7 +99,7 @@
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor></Button>
-                        <BorderPane layoutX="14.0" layoutY="57.0" prefHeight="426.0" prefWidth="750.0">
+                        <BorderPane layoutX="14.0" layoutY="57.0" prefHeight="663.0" prefWidth="773.0">
                            <center>
                               <TextArea fx:id="winText" prefHeight="432.0" prefWidth="704.0" visible="false" BorderPane.alignment="CENTER" />
                            </center>
