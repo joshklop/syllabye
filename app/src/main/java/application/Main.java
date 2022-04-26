@@ -15,6 +15,7 @@ import application.controller.LoginController;
 import application.controller.SignUpController;
 import application.controller.ViewController;
 import application.controller.CreateController;
+import application.controller.DeleteController;
 import application.controller.ForgotPasswordController;
 import application.model.Database;
 import application.model.Accounts;
@@ -39,6 +40,7 @@ public class Main extends Application {
         }
         CreateController.setDatabase(db);
         ViewController.setSyllabye(db.getSyllabye());
+        DeleteController.setSyllabye(db);
         ScheduleController.setDatabase(db);
         Accounts ac = new Accounts();
         SignUpController.setAccounts(ac);

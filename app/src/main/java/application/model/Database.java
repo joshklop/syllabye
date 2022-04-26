@@ -22,17 +22,29 @@ public class Database {
     public void add(Syllabus s) {
         syllabye.put(s.getCourseSubject() + s.getCourseNumber() + s.getSemester() + s.getYear(), s);
     }
+    
+    public void delete(String key) {
+    	syllabye.remove(key);
+    }
 
     public void readSyllabye() throws FileNotFoundException, IOException, ClassNotFoundException {
         ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file.getPath()));
         HashMap<String, Syllabus> result = (HashMap<String, Syllabus>)ois.readObject(); // down-casting object
         setSyllabye(result);
     }
+    
+    public void rewriteSyllabye() throws IOException {
+    	ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(file.getPath()));
+    	oos.close();
+    	writeSyllabye();
+    }
 
     public void writeSyllabye() throws IOException {
         ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(file.getPath()));
         oos.writeObject(syllabye);
     }
+    
+    
 
     public static void setFile(URL resource) throws FileNotFoundException {
         File f = new File(resource.getPath());
