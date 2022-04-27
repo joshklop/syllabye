@@ -63,12 +63,6 @@ public class ScheduleController implements Initializable {
             int i = 0;
             Color[] colors = {Color.RED, Color.BLUE, Color.BLUEVIOLET, Color.DARKCYAN, Color.DARKORANGE, Color.INDIANRED};
             for (Syllabus s : syllabyeBySemester.get(newValue)) {
-                // Remove existing labels
-                removeLabels(mondayBox);
-                removeLabels(tuesdayBox);
-                removeLabels(wednesdayBox);
-                removeLabels(thursdayBox);
-                removeLabels(fridayBox);
                 // TODO sort by day and then start time
                 // Add new labels
                 for (DayOfWeek d : s.getLectureDayTimes().keySet()) {
@@ -90,10 +84,37 @@ public class ScheduleController implements Initializable {
                             break;
                     }
                 }
-                i++;
+                
+                for (DayOfWeek d : s.getRecitationTimes().keySet()) {
+            	   switch (d) {
+                   case MONDAY:
+                       makeRecitationLabel(mondayBox, s, d, colors[i]);
+                       break;
+                   case TUESDAY:
+                       makeRecitationLabel(tuesdayBox, s, d, colors[i]);
+                       break;
+                   case WEDNESDAY:
+                       makeRecitationLabel(wednesdayBox, s, d, colors[i]);
+                       break;
+                   case THURSDAY:
+                       makeRecitationLabel(thursdayBox, s, d, colors[i]);
+                       break;
+                   case FRIDAY:
+                       makeRecitationLabel(fridayBox, s, d, colors[i]);
+                       break;
+               }
+               }
+               i++;
             }
             i = 0;
         });
+        
+     // Remove existing labels
+        removeLabels(mondayBox);
+        removeLabels(tuesdayBox);
+        removeLabels(wednesdayBox);
+        removeLabels(thursdayBox);
+        removeLabels(fridayBox);
 
     }
 
@@ -117,10 +138,31 @@ public class ScheduleController implements Initializable {
         l.setContentDisplay(ContentDisplay.CENTER);
         l.setTextAlignment(TextAlignment.CENTER);
         l.setAlignment(Pos.CENTER);
-        l.setFont(Font.font(14));
+        l.setFont(Font.font(13));
         l.setPrefWidth(box.getWidth());
-
+        
         box.getChildren().add(l);
+           
+    }
+    
+    private void makeRecitationLabel(VBox box, Syllabus s, DayOfWeek d, Color c) {
+    	box.setSpacing(10);
+    	
+    	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("h:mma");
+        String rStart = s.getRecitationTimes().get(d).getRecitationStart().format(formatter);
+        String rEnd = s.getRecitationTimes().get(d).getRecitationEnd().format(formatter);
+        String recitations = s.getCourseSubject() + " " + s.getCourseNumber() + " " + s.getCourseName() + "\nRecitation\n" + rStart + "-" + rEnd;
+        	
+        Label r = new Label(recitations);
+        r.setTextFill(c);
+        r.setWrapText(true);
+        r.setContentDisplay(ContentDisplay.CENTER);
+        r.setTextAlignment(TextAlignment.CENTER);
+        r.setAlignment(Pos.CENTER);
+        r.setFont(Font.font(13));
+        r.setPrefWidth(box.getWidth());
+            
+        box.getChildren().add(r);
     }
 
     public void goToSelectionPage(ActionEvent e) throws IOException {

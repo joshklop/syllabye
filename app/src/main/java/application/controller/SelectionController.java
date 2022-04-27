@@ -62,7 +62,7 @@ public class SelectionController {
     public void switchToSchedule(ActionEvent event) throws IOException {
         root = FXMLLoader.load(getClass().getResource("/fxml/Schedule.fxml"));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
+        scene = new Scene(root, 800, 800);
         stage.setScene(scene);
         stage.show(); 
     }
