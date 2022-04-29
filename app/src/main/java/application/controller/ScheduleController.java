@@ -27,7 +27,6 @@ import javafx.geometry.Pos;
 import javafx.scene.text.TextAlignment;
 import java.time.format.DateTimeFormatter;
 
-
 public class ScheduleController implements Initializable {
     @FXML
     private VBox mondayBox;
@@ -56,43 +55,50 @@ public class ScheduleController implements Initializable {
         }
         // TODO sort semesters by month, year
         semesterComboBox.getItems().addAll(syllabyeBySemester.keySet());
+        // Add class labels to agenda when semester is selected
         semesterComboBox.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue == null || newValue == oldValue) {
                 return;
             }
-            int i = 0;
-            Color[] colors = {Color.RED, Color.BLUE, Color.BLUEVIOLET, Color.DARKCYAN, Color.DARKORANGE, Color.INDIANRED};
+            // Remove existing labels
+            removeLabels(mondayBox);
+            removeLabels(tuesdayBox);
+            removeLabels(wednesdayBox);
+            removeLabels(thursdayBox);
+            removeLabels(fridayBox);
+            ArrayList<Syllabus> monday = new ArrayList<Syllabus>();
+            ArrayList<Syllabus> tuesday = new ArrayList<Syllabus>();
+            ArrayList<Syllabus> wednesday = new ArrayList<Syllabus>();
+            ArrayList<Syllabus> thursday = new ArrayList<Syllabus>();
+            ArrayList<Syllabus> friday = new ArrayList<Syllabus>();
             for (Syllabus s : syllabyeBySemester.get(newValue)) {
-                // Remove existing labels
-                removeLabels(mondayBox);
-                removeLabels(tuesdayBox);
-                removeLabels(wednesdayBox);
-                removeLabels(thursdayBox);
-                removeLabels(fridayBox);
-                // TODO sort by day and then start time
                 // Add new labels
                 for (DayOfWeek d : s.getLectureDayTimes().keySet()) {
                     switch (d) {
                         case MONDAY:
-                            makeLabel(mondayBox, s, d, colors[i]);
+                            monday.add(s);
                             break;
                         case TUESDAY:
-                            makeLabel(tuesdayBox, s, d, colors[i]);
+                            tuesday.add(s);
                             break;
                         case WEDNESDAY:
-                            makeLabel(wednesdayBox, s, d, colors[i]);
+                            wednesday.add(s);
                             break;
                         case THURSDAY:
-                            makeLabel(thursdayBox, s, d, colors[i]);
+                            thursday.add(s);
                             break;
                         case FRIDAY:
-                            makeLabel(fridayBox, s, d, colors[i]);
+                            friday.add(s);
                             break;
                     }
                 }
-                i++;
             }
-            i = 0;
+
+            makeLabels(mondayBox, monday, DayOfWeek.MONDAY);
+            makeLabels(tuesdayBox, tuesday, DayOfWeek.TUESDAY);
+            makeLabels(wednesdayBox, wednesday, DayOfWeek.WEDNESDAY);
+            makeLabels(thursdayBox, thursday, DayOfWeek.THURSDAY);
+            makeLabels(fridayBox, friday, DayOfWeek.FRIDAY);
         });
 
     }
@@ -103,24 +109,36 @@ public class ScheduleController implements Initializable {
         }
     }
 
-    private void makeLabel(VBox box, Syllabus s, DayOfWeek d, Color c) {
+    private void makeLabels(VBox box, ArrayList<Syllabus> alist, DayOfWeek day) {
+        // Sort syllabye by time
+        alist.sort((x, y) -> {
+            return x.getLectureDayTimes()
+            .get(day)
+            .getStart()
+            .compareTo(y.getLectureDayTimes().get(day).getStart());
+        });
+
         box.setSpacing(10);
 
+        Color[] colors = { Color.RED, Color.BLUE, Color.BLUEVIOLET, Color.DARKCYAN, Color.DARKORANGE, Color.INDIANRED };
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("h:mma");
-        String startTime = s.getLectureDayTimes().get(d).getStart().format(formatter);
-        String endTime = s.getLectureDayTimes().get(d).getEnd().format(formatter);
-        String text = s.getCourseSubject() + " " + s.getCourseNumber() + " " + s.getCourseName() + "\n" + startTime + "-" + endTime;
+        for (int i = 0; i < alist.size(); ++i) {
+            Syllabus s = alist.get(i);
+            String startTime = s.getLectureDayTimes().get(day).getStart().format(formatter);
+            String endTime = s.getLectureDayTimes().get(day).getEnd().format(formatter);
+            String text = s.getCourseSubject() + " " + s.getCourseNumber() + " " + s.getCourseName() + "\n" + startTime + "-" + endTime;
 
-        Label l = new Label(text);
-        l.setTextFill(c);
-        l.setWrapText(true);
-        l.setContentDisplay(ContentDisplay.CENTER);
-        l.setTextAlignment(TextAlignment.CENTER);
-        l.setAlignment(Pos.CENTER);
-        l.setFont(Font.font(14));
-        l.setPrefWidth(box.getWidth());
+            Label l = new Label(text);
+            l.setTextFill(colors[i % colors.length]);
+            l.setWrapText(true);
+            l.setContentDisplay(ContentDisplay.CENTER);
+            l.setTextAlignment(TextAlignment.CENTER);
+            l.setAlignment(Pos.CENTER);
+            l.setFont(Font.font(14));
+            l.setPrefWidth(box.getWidth());
 
-        box.getChildren().add(l);
+            box.getChildren().add(l);
+        }
     }
 
     public void goToSelectionPage(ActionEvent e) throws IOException {

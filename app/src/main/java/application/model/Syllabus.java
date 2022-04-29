@@ -5,6 +5,11 @@ import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
+import java.util.Comparator;
 
 public class Syllabus implements Serializable {
     private String courseName;
@@ -147,6 +152,22 @@ public class Syllabus implements Serializable {
 
     public void setLectureDayTimes(HashMap<DayOfWeek,LectureTime> lectures) {
         this.lectureDayTimes = lectures;
+    }
+
+    public List<Map.Entry<DayOfWeek, LectureTime>> sortLectureDayTimes() {
+        List<Map.Entry<DayOfWeek,LectureTime>> list = new ArrayList<Map.Entry<DayOfWeek,LectureTime>>(getLectureDayTimes().entrySet());
+        // TODO use getDisplayName on dayofweek
+        Comparator<Map.Entry<DayOfWeek,LectureTime>> comp = (a, b) -> {
+            if (a.getKey().getValue() < b.getKey().getValue()) {
+                return -1;
+            } else if (a.getKey().getValue() > b.getKey().getValue()) {
+                return 1;
+            } else {
+                return a.getValue().getStart().compareTo(b.getValue().getStart());
+            }
+        };
+        Collections.sort(list, comp);
+        return list;
     }
     
     public HashMap<DayOfWeek,RecitationTime> getRecitationTimes() {
