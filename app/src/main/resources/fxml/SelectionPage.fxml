@@ -14,7 +14,7 @@
          <font>
             <Font size="35.0" />
          </font></Button>
-      <Button layoutX="433.0" layoutY="445.0" mnemonicParsing="false" prefHeight="238.0" prefWidth="243.0" style="-fx-background-radius: 150; -fx-background-color: purple;" text="Delete" textFill="WHITE">
+      <Button layoutX="433.0" layoutY="445.0" mnemonicParsing="false" onAction="#switchToDeleteScene" prefHeight="238.0" prefWidth="243.0" style="-fx-background-radius: 150; -fx-background-color: purple;" text="Delete" textFill="WHITE">
          <font>
             <Font size="35.0" />
          </font></Button>
