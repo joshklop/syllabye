@@ -240,7 +240,7 @@ public class CreateController implements Initializable {
         
         if (subject.isBlank() || number.isBlank() || yr.isBlank()) {
             warning.setText("Fill out all fields marked with '*'");
-        } else if (getDatabase().getSyllabye().containsKey(subject + number + sem + yr)) {
+        } else if (getDatabase().getSyllabye().containsKey(subject + number + Semester.valueOf(sem) + yr)) {
             warning.setText("A syllabus with that subject, number, semester, and year already exists.");
         } else {
             try {
