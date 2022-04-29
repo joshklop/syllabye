@@ -2,6 +2,7 @@ package application.controller;
 
 import java.io.IOException;
 import java.net.URL;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
@@ -19,6 +20,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import application.model.Accounts;
+import application.model.Hash;
 
 public class SignUpController implements Initializable {
     @FXML
@@ -50,7 +52,7 @@ public class SignUpController implements Initializable {
 
 
     @FXML
-    public void switchToLoginScene(ActionEvent event ) throws IOException {
+    public void switchToLoginScene(ActionEvent event ) throws IOException, NoSuchAlgorithmException {
         String firstN = this.firstName.getText();
         String lastN = this.lastName.getText();
         String userN = this.userName.getText();
@@ -67,7 +69,8 @@ public class SignUpController implements Initializable {
         else if (!(ac.isUserNameValid(userN)))
             warning.setText("This username is already taken");
         else {
-            ac.appendToFile(firstN, lastN, userN, eml, cPass, sAns);
+        	String hashed = new Hash().hash256(cPass);
+            ac.appendToFile(firstN, lastN, userN, eml, hashed, sAns);
             root = FXMLLoader.load(getClass().getResource("/fxml/LoginPage.fxml"));
             stage = (Stage)((Node)event.getSource()).getScene().getWindow();
             scene = new Scene(root);

@@ -3,6 +3,7 @@ package application.controller;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
@@ -65,7 +66,7 @@ public class ForgotPasswordController implements Initializable {
     }
 
     @FXML
-    public void switchToResetScene(ActionEvent event ) throws IOException {
+    public void switchToResetScene(ActionEvent event ) throws IOException, NoSuchAlgorithmException {
     	String userN = this.userName.getText();
         String eml = this.email.getText();
         String sAns = this.securityQuesAns.getText();

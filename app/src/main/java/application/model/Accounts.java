@@ -5,7 +5,9 @@ import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
+
 
 public class Accounts {
 
@@ -75,14 +77,15 @@ public class Accounts {
         }
     }
 
-    public boolean isValidaccount(String userName, String password) {
-        String userN;
+    public boolean isValidaccount(String userName, String password) throws NoSuchAlgorithmException {
+    	String hashed = new Hash().hash256(password);
+    	String userN;
         String passW;
         for (int i = 0; i < profiles.size(); i++) {
             userN = profiles.get(i).getUserName();
             passW = profiles.get(i).getPassword();
             if (userN.equals(userName)) {
-                if (passW.equals(password))
+                if (passW.equals(hashed))
                     return true;
                 else
                     return false;
@@ -115,10 +118,11 @@ public class Accounts {
     }
     
     //@Override
-    public void changePassword(String userName, String email, String securityAnswer, String password) {
+    public void changePassword(String userName, String email, String securityAnswer, String password) throws NoSuchAlgorithmException {
     	String userN;
     	String eml;
     	String sAns;
+    	String hashed = new Hash().hash256(password);
     	
     	for (int i = 0; i < profiles.size(); i++) {
     		userN = profiles.get(i).getUserName();
@@ -127,7 +131,7 @@ public class Accounts {
     		if (userN.equals(userName)) {
     			if (eml.equals(email)) {
     				if (sAns.equals(securityAnswer)) {
-    					profiles.get(i).setPassword(password);
+    					profiles.get(i).setPassword(hashed);
     					//read from initialize method, and override it.
     					
     				}

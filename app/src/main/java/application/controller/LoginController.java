@@ -1,6 +1,7 @@
 package application.controller;
 
 import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -49,7 +50,7 @@ public class LoginController {
     }
 
     @FXML
-    public void switchToSelectionScene(ActionEvent event ) throws IOException {
+    public void switchToSelectionScene(ActionEvent event ) throws IOException, NoSuchAlgorithmException {
         String userN = userName.getText();
         String passW = password.getText();
         ac.loadAccountsInfo();
