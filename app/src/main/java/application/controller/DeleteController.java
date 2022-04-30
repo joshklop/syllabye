@@ -46,7 +46,7 @@ public class DeleteController implements Initializable {
     
 	@FXML
     public void goSelection(ActionEvent event) throws IOException {
-       	Parent root = FXMLLoader.load(getClass().getResource("/fxml/SelectionPage.fxml"));
+       	Parent root = FXMLLoader.load(getClass().getResource("/fxml/Selection.fxml"));
     	Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
     	stage.setScene(new Scene(root));
     	stage.show();
@@ -68,7 +68,7 @@ public class DeleteController implements Initializable {
         else {
         	db.delete(subject + number + sem + yr);
         	db.rewriteSyllabye();
-        	Parent root = FXMLLoader.load(getClass().getResource("/fxml/SelectionPage.fxml"));
+        	Parent root = FXMLLoader.load(getClass().getResource("/fxml/Selection.fxml"));
             Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
             stage.setScene(new Scene(root));
             stage.show();

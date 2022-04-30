@@ -1,6 +1,5 @@
 package application.controller;
 
-import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.security.NoSuchAlgorithmException;
@@ -57,8 +56,7 @@ public class ForgotPasswordController implements Initializable {
 
     @FXML
     public void switchToLoginScene(ActionEvent event ) throws IOException {
-        //root = FXMLLoader.load(getClass().getResource(File.separator + "fxml" + File.separator + "LoginPage.fxml"));
-    	root = FXMLLoader.load(getClass().getResource("/fxml/LoginPage.fxml"));
+    	root = FXMLLoader.load(getClass().getResource("/fxml/Login.fxml"));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
@@ -90,8 +88,7 @@ public class ForgotPasswordController implements Initializable {
         else
         {
         	ac.changePassword(userN, eml, sAns, newPass);
-        	//root = FXMLLoader.load(getClass().getResource(File.separator + "fxml" + File.separator + "LoginPage.fxml"));
-        	root = FXMLLoader.load(getClass().getResource("/fxml/LoginPage.fxml"));
+        	root = FXMLLoader.load(getClass().getResource("/fxml/Login.fxml"));
             stage = (Stage)((Node)event.getSource()).getScene().getWindow();
             scene = new Scene(root);
             stage.setScene(scene);

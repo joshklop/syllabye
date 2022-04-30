@@ -32,7 +32,7 @@ public class SelectionController {
         alert.setHeaderText("Are you sure you want to log out");
 
         if (alert.showAndWait().get() == ButtonType.OK){
-            root = FXMLLoader.load(getClass().getResource("/fxml/LoginPage.fxml"));
+            root = FXMLLoader.load(getClass().getResource("/fxml/Login.fxml"));
             stage = (Stage)((Node)event.getSource()).getScene().getWindow();
             scene = new Scene(root);
             stage.setScene(scene);
@@ -51,7 +51,7 @@ public class SelectionController {
     
     @FXML
     public void switchToViewScene(ActionEvent event) throws IOException {
-        root = FXMLLoader.load(getClass().getResource("/fxml/ViewPage.fxml"));
+        root = FXMLLoader.load(getClass().getResource("/fxml/View.fxml"));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root, 800, 800);
         stage.setScene(scene);

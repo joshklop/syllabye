@@ -121,7 +121,7 @@ public class ScheduleController implements Initializable {
     }
 
     public void goToSelectionPage(ActionEvent e) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/fxml/SelectionPage.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/fxml/Selection.fxml"));
         Stage stage = (Stage)((Node)e.getSource()).getScene().getWindow();
         stage.setScene(new Scene(root));
         stage.show();

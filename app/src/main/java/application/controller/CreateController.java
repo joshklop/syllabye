@@ -199,7 +199,7 @@ public class CreateController implements Initializable {
                 db.add(s);
                 db.writeSyllabye();
                 // Go back to SelectionPage scene
-                Parent root = FXMLLoader.load(getClass().getResource("/fxml/SelectionPage.fxml"));
+                Parent root = FXMLLoader.load(getClass().getResource("/fxml/Selection.fxml"));
                 Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
                 stage.setScene(new Scene(root));
                 stage.show();
@@ -212,7 +212,7 @@ public class CreateController implements Initializable {
     @FXML
     public void goHome(ActionEvent event) throws IOException {
         // Note: nothing will save when the user presses the home button
-        Parent root = FXMLLoader.load(getClass().getResource("/fxml/SelectionPage.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/fxml/Selection.fxml"));
         Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         stage.setScene(new Scene(root));
         stage.show();
