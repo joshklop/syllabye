@@ -167,7 +167,7 @@ public class CreateController implements Initializable {
             lectureDayTimes.put(DayOfWeek.MONDAY, new LectureTime(mondayStart.getValue(), mondayEnd.getValue()));
         }
         if (tuesdayStart.getValue() != null && tuesdayEnd.getValue() != null) {
-            lectureDayTimes.put(DayOfWeek.TUESDAY, new LectureTime(tuesdayStartgetValue(), tuesdayEnd.getValue()));
+            lectureDayTimes.put(DayOfWeek.TUESDAY, new LectureTime(tuesdayStart.getValue(), tuesdayEnd.getValue()));
         }
         if (wednesdayStart.getValue() != null && wednesdayEnd.getValue() != null) {
             lectureDayTimes.put(DayOfWeek.WEDNESDAY, new LectureTime(wednesdayStart.getValue(), wednesdayEnd.getValue()));
