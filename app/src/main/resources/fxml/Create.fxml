@@ -177,6 +177,8 @@
                   <Font name="System Bold" size="23.0" />
                </font>
             </Label>
+            <Button layoutX="21.0" layoutY="10.0" mnemonicParsing="false" onAction="#uploadFile" text="Upload File" />
+            <Label fx:id="fileWarning" layoutX="123.0" layoutY="14.0" textFill="RED" />
          </children>
       </AnchorPane>
    </top>

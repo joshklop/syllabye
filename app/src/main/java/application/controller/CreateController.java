@@ -10,12 +10,16 @@ import java.time.DayOfWeek;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.ResourceBundle;
+import java.util.Scanner;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.stage.FileChooser;
+import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
@@ -49,6 +53,8 @@ public class CreateController implements Initializable {
     private ChoiceBox<String> extraCredit;
     @FXML
     private Label warning;
+    @FXMl
+    private Label fileWarning;
     @FXML
     private CheckBox recitation;
 
@@ -235,6 +241,89 @@ public class CreateController implements Initializable {
         if (fridayStart.getValue() != null) {
             fridayEnd.setItems(fridayEnd.getItems().filtered(time -> time.isAfter(fridayStart.getValue())));
         }
+    }
+    
+    public void uploadFile(ActionEvent event) throws IOException{  	
+    	FileChooser fileChooser = new FileChooser();
+    	fileChooser.getExtensionFilters().addAll(
+    			new ExtensionFilter("Text files", "*.txt")
+    			);
+    	File file = fileChooser.showOpenDialog(null);
+    	
+    	if (file != null) {
+    		Scanner scanner = new Scanner(file);
+    		ArrayList<String> l = new ArrayList<String>();
+    		
+    		while(scanner.hasNextLine()) {
+    			//parse string
+    			l.add(scanner.nextLine());
+    		}
+    		scanner.close();
+    		
+    		String[] arr = new String[l.size()];
+    		
+    		for(int i = 0; i < l.size(); i++) {
+    			String line = l.get(i).toString().substring(l.get(i).toString().lastIndexOf(": ") + 1);
+    			arr[i] = line;
+    		}
+    		setText(arr);
+    		
+    	} else {
+    		fileWarning.setText("Invalid file");
+    	}
+    }
+    
+    public void setText(String[] arr) {
+    	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("h:mma");
+    	
+    	//error check semester (Spring, May, Summer, Fall, Winterer) , extra credit (Yes,No)
+    	semester.setValue(arr[0]);
+    	year.setText(arr[1]);
+    	courseSubject.setText(arr[2]);
+    	courseNumber.setText(arr[3]);
+    	courseName.setText(arr[4]);
+    	location.setText(arr[5]);
+    	professorName.setText(arr[6]);
+    	professorEmail.setText(arr[7]);;
+    	extraCredit.setValue(arr[8]);
+    	
+    	String[] lTime = arr[9].split("[,]",0);
+   
+    	for(int i = 0; i < lTime.length; i++) {
+    		String time = lTime[i].substring(3,lTime[i].length());
+    		String[] times = time.split(" - ");
+    		String start = times[0].trim();
+    		String end = times[1].trim();
+    		
+    		LocalTime startLocalTime = LocalTime.parse(start, formatter);
+    		LocalTime endLocalTime = LocalTime.parse(end,formatter);
+    		
+    		String day = lTime[i].substring(1,3).trim();
+    		
+    		switch(day) {
+    			case "M":
+    				mondayStart.setValue(startLocalTime);
+    				mondayEnd.setValue(endLocalTime);
+    				break;
+    			case "T":
+    				tuesdayStart.setValue(startLocalTime);
+    				tuesdayEnd.setValue(endLocalTime);
+    				break;
+    			case "W":
+    				wednesdayStart.setValue(startLocalTime);
+    				wednesdayEnd.setValue(endLocalTime);
+    				break;
+    			case "TR":
+    				thursdayStart.setValue(startLocalTime);
+    				thursdayEnd.setValue(endLocalTime);
+    				break;
+    			case "F":
+    				fridayStart.setValue(startLocalTime);
+    				fridayEnd.setValue(endLocalTime);
+    				break;
+    		} 
+    	}
+    	
     }
 
     public static void setDatabase(Database db) {
