@@ -17,12 +17,12 @@ public class Syllabus implements Serializable {
     private String professorEmail;
     private boolean extraCredit;
     private HashMap<DayOfWeek,LectureTime> lectureDayTimes;
-    private HashMap<DayOfWeek,RecitationTime> recitationTimes;
+    private boolean recitation;
 
     public Syllabus(String courseName, int courseNumber, String courseSubject, 
             String professorName, Semester semester, int year, String location,
             String professorEmail, boolean extraCredit, 
-            HashMap<DayOfWeek,LectureTime> lectureDayTimes, HashMap<DayOfWeek,RecitationTime> recitationTimes) {
+            HashMap<DayOfWeek,LectureTime> lectureDayTimes, boolean recitation) {
         this.setCourseName(courseName);
         this.setCourseNumber(courseNumber);
         this.setCourseSubject(courseSubject);
@@ -33,7 +33,7 @@ public class Syllabus implements Serializable {
         this.setProfessorEmail(professorEmail);
         this.setExtraCredit(extraCredit);
         this.setLectureDayTimes(lectureDayTimes);
-        this.setRecitationTimes(recitationTimes);
+        this.setRecitation(recitation);
     }
 
     public String getCourseName() {
@@ -122,21 +122,6 @@ public class Syllabus implements Serializable {
     		content += t1 + " to " + t2 + "\n";
 
     	}
-    	content += "\tRecitation:\n";
-    	if (recitationTimes.isEmpty())
-    		content += "\t\tNo recitation for this course\n";
-    	else {
-    		keySet = recitationTimes.keySet().toArray();
-        	Arrays.sort(keySet);
-        	formatter = DateTimeFormatter.ofPattern("h:mma");
-        	for (Object d : keySet) {
-        		String t1 = recitationTimes.get(d).getRecitationStart().format(formatter);
-        		String t2 = recitationTimes.get(d).getRecitationEnd().format(formatter);
-        		content += "\t\t" + ((DayOfWeek) d).name().substring(0,1).toUpperCase() + ((DayOfWeek) d).name().substring(1).toLowerCase() + " - "; 
-        		content += t1 + " to " + t2 + "\n";
-
-        	}
-    	}
     	content += (extraCredit ? "Extra credit is available for this class\n": "No Extra Credit is available for this class\n");
     	return content;
     }
@@ -148,12 +133,12 @@ public class Syllabus implements Serializable {
     public void setLectureDayTimes(HashMap<DayOfWeek,LectureTime> lectures) {
         this.lectureDayTimes = lectures;
     }
-    
-    public HashMap<DayOfWeek,RecitationTime> getRecitationTimes() {
-    	return recitationTimes;
+
+    public boolean isRecitation() {
+        return recitation;
     }
-    
-    public void setRecitationTimes(HashMap<DayOfWeek,RecitationTime> recitations) {
-    	this.recitationTimes = recitations;
+
+    public void setRecitation(boolean recitation) {
+        this.recitation = recitation;
     }
 }

@@ -20,7 +20,7 @@ public class Database {
     }
 
     public void add(Syllabus s) {
-        syllabye.put(s.getCourseSubject() + s.getCourseNumber() + s.getSemester() + s.getYear(), s);
+        syllabye.put(Database.computeKey(s), s);
     }
     
     public void delete(String key) {
@@ -29,7 +29,7 @@ public class Database {
 
     public void readSyllabye() throws FileNotFoundException, IOException, ClassNotFoundException {
         ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file.getPath()));
-        HashMap<String, Syllabus> result = (HashMap<String, Syllabus>)ois.readObject(); // down-casting object
+        HashMap<String, Syllabus> result = (HashMap<String, Syllabus>)ois.readObject();
         setSyllabye(result);
     }
     
@@ -44,8 +44,6 @@ public class Database {
         oos.writeObject(syllabye);
     }
     
-    
-
     public static void setFile(URL resource) throws FileNotFoundException {
         File f = new File(resource.getPath());
         if (!f.isFile())
@@ -67,5 +65,9 @@ public class Database {
 
     public void resetSyllabye() {
         setSyllabye(new HashMap<String, Syllabus>());
+    }
+
+    public static String computeKey(Syllabus s) {
+        return s.getCourseSubject() + s.getCourseNumber() + s.getSemester() + s.getYear() + s.isRecitation();
     }
 }
