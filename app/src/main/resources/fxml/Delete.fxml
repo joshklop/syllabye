@@ -11,15 +11,15 @@
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.DeleteController">
    <children>
       <Button layoutX="700.0" layoutY="14.0" mnemonicParsing="false" onAction="#goSelection" style="-fx-focus-traversable: false;" text="back" />
-      <TextField fx:id="courseSubject" layoutX="244.0" layoutY="178.0" prefHeight="26.0" prefWidth="465.0" promptText="CS" />
+      <TextField fx:id="courseSubject" layoutX="244.0" layoutY="178.0" prefHeight="26.0" prefWidth="465.0" promptText="CS" style="-fx-focus-traversable: false;" />
       <Label layoutX="31.0" layoutY="65.0" text="Please enter the following information">
          <font>
             <Font name="Arial" size="27.0" />
          </font>
       </Label>
       <Line endX="645.5" layoutX="131.0" layoutY="126.0" startX="-100.0" stroke="#00bbff" />
-      <TextField fx:id="courseNumber" layoutX="244.0" layoutY="238.0" prefHeight="26.0" prefWidth="465.0" promptText="3343" />
-      <TextField fx:id="year" layoutX="244.0" layoutY="357.0" prefHeight="26.0" prefWidth="465.0" promptText="2022" />
+      <TextField fx:id="courseNumber" layoutX="244.0" layoutY="238.0" prefHeight="26.0" prefWidth="465.0" promptText="3343" style="-fx-focus-traversable: false;" />
+      <TextField fx:id="year" layoutX="244.0" layoutY="357.0" prefHeight="26.0" prefWidth="465.0" promptText="2022" style="-fx-focus-traversable: false;" />
       <Label layoutX="48.0" layoutY="178.0" text="Course Subject">
          <font>
             <Font size="20.0" />
@@ -40,8 +40,18 @@
             <Font size="20.0" />
          </font>
       </Label>
-      <ChoiceBox fx:id="semester" layoutX="386.0" layoutY="295.0" prefWidth="150.0" />
-      <Button layoutX="346.0" layoutY="502.0" mnemonicParsing="false" onAction="#onDelete" text="Delete Course" />
-      <Label fx:id="warning" alignment="CENTER" layoutX="255.0" layoutY="427.0" prefHeight="46.0" prefWidth="290.0" textFill="RED" />
+      <ChoiceBox fx:id="semester" layoutX="244.0" layoutY="295.0" prefHeight="26.0" prefWidth="150.0" style="-fx-focus-traversable: false;" />
+      <Button layoutX="372.0" layoutY="601.0" mnemonicParsing="false" onAction="#onDelete" prefHeight="32.0" prefWidth="81.0" text="Delete">
+         <font>
+            <Font size="16.0" />
+         </font></Button>
+      <Label fx:id="warning" alignment="CENTER" contentDisplay="CENTER" layoutX="175.0" layoutY="508.0" prefHeight="46.0" prefWidth="475.0" textFill="RED" />
+      <ChoiceBox fx:id="delete" layoutX="244.0" layoutY="437.0" prefHeight="26.0" prefWidth="150.0" style="-fx-focus-traversable: false;" />
+      <Label layoutX="46.0" layoutY="437.0" text="Select an option">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Label>
+      <Label fx:id="warn" layoutX="528.0" layoutY="442.0" text="*Please select an option*" textFill="#f80000" visible="false" />
    </children>
 </AnchorPane>

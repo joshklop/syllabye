@@ -2,6 +2,7 @@ package application.controller;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.ResourceBundle;
 
@@ -29,9 +30,14 @@ public class DeleteController implements Initializable {
     @FXML
     private ChoiceBox<String> semester;
     @FXML
+    private ChoiceBox<String> delete;
+    private ArrayList<String> choices = new ArrayList<String>();
+    @FXML
     private TextField year;
     @FXML
     private Label warning;
+    @FXML
+    private Label warn;
     private static Database db;
     
     @Override
@@ -42,6 +48,10 @@ public class DeleteController implements Initializable {
              semester.getItems().add(sem.substring(0, 1).toUpperCase() + sem.substring(1).toLowerCase());
          }
          semester.setValue("Spring");
+         choices.add("Delete lecture");
+         choices.add("Delete recitation/lab");
+         choices.add("Delete both");
+         delete.getItems().addAll(choices); 
 	}
     
 	@FXML
@@ -54,24 +64,42 @@ public class DeleteController implements Initializable {
 	
 	@FXML
 	public void onDelete(ActionEvent event) throws IOException {
-		HashMap<String, Syllabus> syllabye;
 		String subject = courseSubject.getText().toUpperCase().strip();
         String number = courseNumber.getText().strip();
         String sem = semester.getValue().strip();
         String yr = year.getText().strip();
         if (subject.isBlank() || number.isBlank() || yr.isBlank())
             warning.setText("Please fill out all fields");
-        else if (!(db.getSyllabye().containsKey(subject + number + sem + yr + "false")))
-        	warning.setText("This course does not exist, please check your inputs ");
-        else {
-        	db.delete(subject + number + sem + yr + false);
-        	if (db.getSyllabye().containsKey(subject + number + sem + yr + "true"))
+        else if (delete.getValue() == null)
+        	warn.setVisible(true);
+        else if (delete.getValue().equals(choices.get(0))) {
+        	if (!(db.getSyllabye().containsKey(subject + number + sem + yr + "false")))
+        		warning.setText("This lecture does not exist, please check your inputs ");
+        	else {
+        		db.delete(subject + number + sem + yr + false);
+        		db.rewriteSyllabye();
+        		goSelection(event);
+        	}
+        }
+        else if (delete.getValue().equals(choices.get(1))) {
+        	if (!(db.getSyllabye().containsKey(subject + number + sem + yr + "true")))
+        		warning.setText("This recitation/lab does not exist, please check your inputs ");
+        	else {
         		db.delete(subject + number + sem + yr + true);
-        	db.rewriteSyllabye();
-        	Parent root = FXMLLoader.load(getClass().getResource("/fxml/SelectionPage.fxml"));
-            Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-            stage.setScene(new Scene(root));
-            stage.show();
+        		db.rewriteSyllabye();
+        		goSelection(event);
+        	}
+        }
+        else {
+        	if (!(db.getSyllabye().containsKey(subject + number + sem + yr + "true") &&
+        		  db.getSyllabye().containsKey(subject + number + sem + yr + "false")))
+        		warning.setText("This lecture/recitation/lab does not exist, please check your inputs ");
+        	else {
+        		db.delete(subject + number + sem + yr + false);
+        		db.delete(subject + number + sem + yr + true);
+        		db.rewriteSyllabye();
+        		goSelection(event);
+        	}
         }
 	}
 
