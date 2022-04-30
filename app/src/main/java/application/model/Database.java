@@ -33,12 +33,6 @@ public class Database {
         setSyllabye(result);
     }
     
-    public void rewriteSyllabye() throws IOException {
-    	ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(file.getPath()));
-    	oos.close();
-    	writeSyllabye();
-    }
-
     public void writeSyllabye() throws IOException {
         ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(file.getPath()));
         oos.writeObject(syllabye);

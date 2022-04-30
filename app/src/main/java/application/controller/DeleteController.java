@@ -77,7 +77,7 @@ public class DeleteController implements Initializable {
         		warning.setText("This lecture does not exist, please check your inputs ");
         	else {
         		db.delete(subject + number + sem + yr + false);
-        		db.rewriteSyllabye();
+        		db.writeSyllabye();
         		goSelection(event);
         	}
         }
@@ -86,7 +86,7 @@ public class DeleteController implements Initializable {
         		warning.setText("This recitation/lab does not exist, please check your inputs ");
         	else {
         		db.delete(subject + number + sem + yr + true);
-        		db.rewriteSyllabye();
+        		db.writeSyllabye();
         		goSelection(event);
         	}
         }
@@ -97,7 +97,7 @@ public class DeleteController implements Initializable {
         	else {
         		db.delete(subject + number + sem + yr + false);
         		db.delete(subject + number + sem + yr + true);
-        		db.rewriteSyllabye();
+        		db.writeSyllabye();
         		goSelection(event);
         	}
         }
