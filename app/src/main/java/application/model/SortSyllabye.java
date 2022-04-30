@@ -5,6 +5,7 @@ import java.util.Set;
 
 
 
+
 public class SortSyllabye {
 	private ArrayList<Syllabus> spring;
 	private ArrayList<Syllabus> may;
@@ -44,6 +45,10 @@ public class SortSyllabye {
 		    		break;
 		    }
 		}
+	}
+	
+	public void sortComp(ArrayList<Syllabus> s) {
+		s.sort(Syllabus.SyllabusComparator);
 	}
 	
 	public boolean validYear(Syllabus s) {

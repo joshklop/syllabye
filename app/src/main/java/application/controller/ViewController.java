@@ -80,6 +80,7 @@ public class ViewController implements Initializable {
 	public void springInfo() {
 		sprText.setVisible(true);
 		ss.setYear(Integer.parseInt(sprYr.getText()));
+		ss.sortComp(ss.getSpring());
 		Iterator<Syllabus> s = ss.getSpring().iterator();
 		sprText.setText(iterate(s));
 	}
@@ -88,6 +89,7 @@ public class ViewController implements Initializable {
 	public void mayInfo() {
 		mayText.setVisible(true);
 		ss.setYear(Integer.parseInt(mayYr.getText()));
+		ss.sortComp(ss.getMay());
 		Iterator<Syllabus> s = ss.getMay().iterator();
 		mayText.setText(iterate(s));
 		
@@ -97,6 +99,7 @@ public class ViewController implements Initializable {
 	public void summerInfo() {
 		sumText.setVisible(true);
 		ss.setYear(Integer.parseInt(sumYr.getText()));
+		ss.sortComp(ss.getSummer());
 		Iterator<Syllabus> s = ss.getSummer().iterator();
 		sumText.setText(iterate(s));
 	}
@@ -105,6 +108,7 @@ public class ViewController implements Initializable {
 	public void fallInfo() {
 		fallText.setVisible(true);
 		ss.setYear(Integer.parseInt(fallYr.getText()));
+		ss.sortComp(ss.getFall());
 		Iterator<Syllabus> s = ss.getFall().iterator();
 		fallText.setText(iterate(s));
 	}
@@ -113,6 +117,7 @@ public class ViewController implements Initializable {
 	public void winterInfo() {
 		winText.setVisible(true);
 		ss.setYear(Integer.parseInt(winYr.getText()));
+		ss.sortComp(ss.getWinter());
 		Iterator<Syllabus> s = ss.getWinter().iterator();
 		winText.setText(iterate(s));
 	}

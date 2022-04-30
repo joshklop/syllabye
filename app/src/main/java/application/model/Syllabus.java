@@ -3,7 +3,10 @@ package application.model;
 import java.time.DayOfWeek;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.HashMap;
+
+
 import java.io.Serializable;
 
 public class Syllabus implements Serializable {
@@ -36,6 +39,14 @@ public class Syllabus implements Serializable {
         this.setRecitation(recitation);
     }
 
+    public static Comparator<Syllabus> SyllabusComparator = new Comparator<Syllabus>() {
+    	public int compare(Syllabus syllabus1, Syllabus syllabus2) {
+    		int subjectScore = syllabus1.getCourseSubject().compareToIgnoreCase(syllabus2.getCourseSubject());
+    		int numberScore = Integer.compare(syllabus1.getCourseNumber(), syllabus2.getCourseNumber());
+    		return subjectScore + numberScore;
+    	}
+    };
+    
     public String getCourseName() {
         return courseName;
     }
@@ -109,20 +120,21 @@ public class Syllabus implements Serializable {
     }
     
     public String toString() {
-    	String content = courseName + " (" + courseSubject + courseNumber + ")\nProfessor: " + professorName
-    			+ "\t\tEmail: " + professorEmail + "\nLocation: " + location + "\n";
-    	content += "\tLecture:\n";
+    	String courseType = recitation ? "Recitation" : "Lecture";
+    	String content = courseName + " (" + courseSubject + courseNumber + ") - " + courseType + "\n\tProfessor: " + professorName
+    			+ "\t\tEmail: " + professorEmail + "\n\tLocation: " + location + "\n";
+    	content += "\tScheduled Meeting Times\n";
     	Object[] keySet = lectureDayTimes.keySet().toArray();
     	Arrays.sort(keySet);
     	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("h:mma");
     	for (Object d : keySet) {
     		String t1 = lectureDayTimes.get(d).getStart().format(formatter);
     		String t2 = lectureDayTimes.get(d).getEnd().format(formatter);
-    		content += "\t\t" + ((DayOfWeek) d).name().substring(0,1).toUpperCase() + ((DayOfWeek) d).name().substring(1).toLowerCase() + " - "; 
+    		content += "\t\t\t- " + ((DayOfWeek) d).name().substring(0,1).toUpperCase() + ((DayOfWeek) d).name().substring(1).toLowerCase() + " - "; 
     		content += t1 + " to " + t2 + "\n";
 
     	}
-    	content += (extraCredit ? "Extra credit is available for this class\n": "No Extra Credit is available for this class\n");
+    	content += (extraCredit ? "\tExtra credit is available for this class\n": "\tNo Extra Credit is available for this class\n");
     	return content;
     }
 
