@@ -59,14 +59,14 @@ public class DeleteController implements Initializable {
         String number = courseNumber.getText().strip();
         String sem = semester.getValue().strip();
         String yr = year.getText().strip();
-        //System.out.println("The set is: " + db.getSyllabye().keySet());
-        //System.out.println(subject + number + sem + yr);
         if (subject.isBlank() || number.isBlank() || yr.isBlank())
             warning.setText("Please fill out all fields");
-        else if (!(db.getSyllabye().containsKey(subject + number + sem + yr)))
+        else if (!(db.getSyllabye().containsKey(subject + number + sem + yr + "false")))
         	warning.setText("This course does not exist, please check your inputs ");
         else {
-        	db.delete(subject + number + sem + yr);
+        	db.delete(subject + number + sem + yr + false);
+        	if (db.getSyllabye().containsKey(subject + number + sem + yr + "true"))
+        		db.delete(subject + number + sem + yr + true);
         	db.rewriteSyllabye();
         	Parent root = FXMLLoader.load(getClass().getResource("/fxml/SelectionPage.fxml"));
             Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
