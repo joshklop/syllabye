@@ -102,7 +102,7 @@ public class ScheduleController implements Initializable {
                     String endTime = s.getLectureDayTimes().get(day).getEnd().format(formatter);
                     String text; 
                     if (s.isRecitation()) {
-                        text = s.getCourseSubject() + " " + s.getCourseNumber() + " " + s.getCourseName() + "Recitation\n" + startTime + "-" + endTime;
+                        text = s.getCourseSubject() + " " + s.getCourseNumber() + " " + s.getCourseName() + " Recitation\n" + startTime + "-" + endTime;
                     } else {
                         text = s.getCourseSubject() + " " + s.getCourseNumber() + " " + s.getCourseName() + "\n" + startTime + "-" + endTime;
                     }
@@ -112,7 +112,7 @@ public class ScheduleController implements Initializable {
                     l.setContentDisplay(ContentDisplay.CENTER);
                     l.setTextAlignment(TextAlignment.CENTER);
                     l.setAlignment(Pos.CENTER);
-                    l.setFont(Font.font(14));
+                    l.setFont(Font.font(13));
                     l.setPrefWidth(boxes.get(day).getWidth());
                     boxes.get(day).getChildren().add(l);
                 }

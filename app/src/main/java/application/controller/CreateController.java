@@ -4,6 +4,7 @@ import application.model.Syllabus;
 import application.model.Semester;
 import application.model.Database;
 import application.model.LectureTime;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.time.DayOfWeek;
@@ -53,7 +54,7 @@ public class CreateController implements Initializable {
     private ChoiceBox<String> extraCredit;
     @FXML
     private Label warning;
-    @FXMl
+    @FXML
     private Label fileWarning;
     @FXML
     private CheckBox recitation;
@@ -263,21 +264,19 @@ public class CreateController implements Initializable {
     		String[] arr = new String[l.size()];
     		
     		for(int i = 0; i < l.size(); i++) {
-    			String line = l.get(i).toString().substring(l.get(i).toString().lastIndexOf(": ") + 1);
+    			String line = l.get(i).toString().trim().substring(l.get(i).toString().lastIndexOf(": ") + 1);
     			arr[i] = line;
     		}
     		setText(arr);
     		
     	} else {
-    		fileWarning.setText("Invalid file");
+    		fileWarning.setText("Process stopped or error opening file.");
     	}
     }
     
     public void setText(String[] arr) {
     	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("h:mma");
     	
-    	//error check semester (Spring, May, Summer, Fall, Winterer) , extra credit (Yes,No)
-    	semester.setValue(arr[0]);
     	year.setText(arr[1]);
     	courseSubject.setText(arr[2]);
     	courseNumber.setText(arr[3]);
@@ -285,7 +284,7 @@ public class CreateController implements Initializable {
     	location.setText(arr[5]);
     	professorName.setText(arr[6]);
     	professorEmail.setText(arr[7]);;
-    	extraCredit.setValue(arr[8]);
+    	extraCredit.setValue(arr[8].trim());
     	
     	String[] lTime = arr[9].split("[,]",0);
    
@@ -322,6 +321,11 @@ public class CreateController implements Initializable {
     				fridayEnd.setValue(endLocalTime);
     				break;
     		} 
+    	}
+    	arr[10] = arr[10].trim();
+    	
+    	if(arr[10].equals("Yes")) {
+    		recitation.setSelected(true);
     	}
     	
     }
