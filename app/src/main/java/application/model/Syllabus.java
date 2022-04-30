@@ -5,11 +5,6 @@ import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
-import java.util.Comparator;
 
 public class Syllabus implements Serializable {
     private String courseName;
@@ -22,12 +17,12 @@ public class Syllabus implements Serializable {
     private String professorEmail;
     private boolean extraCredit;
     private HashMap<DayOfWeek,LectureTime> lectureDayTimes;
-    private HashMap<DayOfWeek,RecitationTime> recitationTimes;
+    private boolean recitation;
 
     public Syllabus(String courseName, int courseNumber, String courseSubject, 
             String professorName, Semester semester, int year, String location,
             String professorEmail, boolean extraCredit, 
-            HashMap<DayOfWeek,LectureTime> lectureDayTimes, HashMap<DayOfWeek,RecitationTime> recitationTimes) {
+            HashMap<DayOfWeek,LectureTime> lectureDayTimes, boolean recitation) {
         this.setCourseName(courseName);
         this.setCourseNumber(courseNumber);
         this.setCourseSubject(courseSubject);
@@ -38,7 +33,7 @@ public class Syllabus implements Serializable {
         this.setProfessorEmail(professorEmail);
         this.setExtraCredit(extraCredit);
         this.setLectureDayTimes(lectureDayTimes);
-        this.setRecitationTimes(recitationTimes);
+        this.setRecitation(recitation);
     }
 
     public String getCourseName() {
@@ -127,21 +122,6 @@ public class Syllabus implements Serializable {
     		content += t1 + " to " + t2 + "\n";
 
     	}
-    	content += "\tRecitation:\n";
-    	if (recitationTimes.isEmpty())
-    		content += "\t\tNo recitation for this course\n";
-    	else {
-    		keySet = recitationTimes.keySet().toArray();
-        	Arrays.sort(keySet);
-        	formatter = DateTimeFormatter.ofPattern("h:mma");
-        	for (Object d : keySet) {
-        		String t1 = recitationTimes.get(d).getRecitationStart().format(formatter);
-        		String t2 = recitationTimes.get(d).getRecitationEnd().format(formatter);
-        		content += "\t\t" + ((DayOfWeek) d).name().substring(0,1).toUpperCase() + ((DayOfWeek) d).name().substring(1).toLowerCase() + " - "; 
-        		content += t1 + " to " + t2 + "\n";
-
-        	}
-    	}
     	content += (extraCredit ? "Extra credit is available for this class\n": "No Extra Credit is available for this class\n");
     	return content;
     }
@@ -154,27 +134,11 @@ public class Syllabus implements Serializable {
         this.lectureDayTimes = lectures;
     }
 
-    public List<Map.Entry<DayOfWeek, LectureTime>> sortLectureDayTimes() {
-        List<Map.Entry<DayOfWeek,LectureTime>> list = new ArrayList<Map.Entry<DayOfWeek,LectureTime>>(getLectureDayTimes().entrySet());
-        // TODO use getDisplayName on dayofweek
-        Comparator<Map.Entry<DayOfWeek,LectureTime>> comp = (a, b) -> {
-            if (a.getKey().getValue() < b.getKey().getValue()) {
-                return -1;
-            } else if (a.getKey().getValue() > b.getKey().getValue()) {
-                return 1;
-            } else {
-                return a.getValue().getStart().compareTo(b.getValue().getStart());
-            }
-        };
-        Collections.sort(list, comp);
-        return list;
+    public boolean isRecitation() {
+        return recitation;
     }
-    
-    public HashMap<DayOfWeek,RecitationTime> getRecitationTimes() {
-    	return recitationTimes;
-    }
-    
-    public void setRecitationTimes(HashMap<DayOfWeek,RecitationTime> recitations) {
-    	this.recitationTimes = recitations;
+
+    public void setRecitation(boolean recitation) {
+        this.recitation = recitation;
     }
 }

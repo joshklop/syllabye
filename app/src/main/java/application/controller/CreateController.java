@@ -4,8 +4,6 @@ import application.model.Syllabus;
 import application.model.Semester;
 import application.model.Database;
 import application.model.LectureTime;
-import application.model.RecitationTime;
-import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.time.DayOfWeek;
@@ -27,6 +25,7 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.util.converter.LocalTimeStringConverter;
+import javafx.scene.control.CheckBox;
 
 public class CreateController implements Initializable {
     // Syllabus fields
@@ -50,6 +49,8 @@ public class CreateController implements Initializable {
     private ChoiceBox<String> extraCredit;
     @FXML
     private Label warning;
+    @FXML
+    private CheckBox recitation;
 
     // Lecture Times
     @FXML
@@ -72,28 +73,6 @@ public class CreateController implements Initializable {
     private ComboBox<LocalTime> fridayStart;
     @FXML
     private ComboBox<LocalTime> fridayEnd;
-    
-    // Recitation Times
-    @FXML
-    private ComboBox<LocalTime> mondayStart1;
-    @FXML
-    private ComboBox<LocalTime> mondayEnd1;
-    @FXML
-    private ComboBox<LocalTime> tuesdayStart1;
-    @FXML
-    private ComboBox<LocalTime> tuesdayEnd1;
-    @FXML
-    private ComboBox<LocalTime> wednesdayStart1;
-    @FXML
-    private ComboBox<LocalTime> wednesdayEnd1;
-    @FXML
-    private ComboBox<LocalTime> thursdayStart1;
-    @FXML
-    private ComboBox<LocalTime> thursdayEnd1;
-    @FXML
-    private ComboBox<LocalTime> fridayStart1;
-    @FXML
-    private ComboBox<LocalTime> fridayEnd1;
 
     private static Database db;
 
@@ -152,10 +131,9 @@ public class CreateController implements Initializable {
         };
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("h:mma");
         LocalTime[] localTimes = Arrays.stream(times)
-            .map(t -> LocalTime.parse(t, formatter))
-            .toArray(LocalTime[]::new);
+        .map(t -> LocalTime.parse(t, formatter))
+        .toArray(LocalTime[]::new);
         LocalTimeStringConverter converter = new LocalTimeStringConverter(formatter, formatter);
-        // TODO clean up this mess: make a nice DatePicker-like UI, but with days of the week
         // and times instead. Didn't have time for that on the first try
         // TODO there should be a "default" value that allows users to cancel a selection...
         //Lecture Times
@@ -179,31 +157,6 @@ public class CreateController implements Initializable {
         fridayStart.getItems().addAll(localTimes);
         fridayEnd.setConverter(converter);
         fridayEnd.getItems().addAll(localTimes);
-        
-        //Recitations 
-        mondayStart1.setConverter(converter);;
-        mondayStart1.getItems().addAll(localTimes);
-        mondayEnd1.setConverter(converter);
-        mondayEnd1.getItems().addAll(localTimes);
-        tuesdayStart1.setConverter(converter);
-        tuesdayStart1.getItems().addAll(localTimes);
-        tuesdayEnd1.setConverter(converter);
-        tuesdayEnd1.getItems().addAll(localTimes);
-        wednesdayStart1.setConverter(converter);
-        wednesdayStart1.getItems().addAll(localTimes);
-        wednesdayEnd1.setConverter(converter);
-        wednesdayEnd1.getItems().addAll(localTimes);
-        thursdayStart1.setConverter(converter);
-        thursdayStart1.getItems().addAll(localTimes);
-        thursdayEnd1.setConverter(converter);
-        thursdayEnd1.getItems().addAll(localTimes);
-        fridayStart1.setConverter(converter);
-        fridayStart1.getItems().addAll(localTimes);
-        fridayEnd1.setConverter(converter);
-        fridayEnd1.getItems().addAll(localTimes);
-        
-       
-        mondayStart.getItems().add(null);
     }
 
     @FXML
@@ -211,50 +164,36 @@ public class CreateController implements Initializable {
         // Get lecture times into HashMap
         HashMap<DayOfWeek,LectureTime> lectureDayTimes = new HashMap<DayOfWeek,LectureTime>();
         if (mondayStart.getValue() != null && mondayEnd.getValue() != null)
-            lectureDayTimes.put(DayOfWeek.MONDAY, new LectureTime(mondayStart.getValue(), mondayEnd.getValue()));
+        lectureDayTimes.put(DayOfWeek.MONDAY, new LectureTime(mondayStart.getValue(), mondayEnd.getValue()));
         if (tuesdayStart.getValue() != null && tuesdayEnd.getValue() != null)
-            lectureDayTimes.put(DayOfWeek.TUESDAY, new LectureTime(tuesdayStart.getValue(), tuesdayEnd.getValue()));
+        lectureDayTimes.put(DayOfWeek.TUESDAY, new LectureTime(tuesdayStart.getValue(), tuesdayEnd.getValue()));
         if (wednesdayStart.getValue() != null && wednesdayEnd.getValue() != null)
-            lectureDayTimes.put(DayOfWeek.WEDNESDAY, new LectureTime(wednesdayStart.getValue(), wednesdayEnd.getValue()));
+        lectureDayTimes.put(DayOfWeek.WEDNESDAY, new LectureTime(wednesdayStart.getValue(), wednesdayEnd.getValue()));
         if (thursdayStart.getValue() != null && thursdayEnd.getValue() != null)
-            lectureDayTimes.put(DayOfWeek.THURSDAY, new LectureTime(thursdayStart.getValue(), thursdayEnd.getValue()));
+        lectureDayTimes.put(DayOfWeek.THURSDAY, new LectureTime(thursdayStart.getValue(), thursdayEnd.getValue()));
         if (fridayStart.getValue() != null && fridayEnd.getValue() != null)
-            lectureDayTimes.put(DayOfWeek.FRIDAY, new LectureTime(fridayStart.getValue(), fridayEnd.getValue()));
-        
-        HashMap<DayOfWeek,RecitationTime> recitationTimes = new HashMap<DayOfWeek,RecitationTime>();
-        if (mondayStart1.getValue() != null && mondayEnd1.getValue() != null)
-        	recitationTimes.put(DayOfWeek.MONDAY, new RecitationTime(mondayStart1.getValue(), mondayEnd1.getValue()));
-        if (tuesdayStart1.getValue() != null && tuesdayEnd1.getValue() != null)
-        	recitationTimes.put(DayOfWeek.TUESDAY, new RecitationTime(tuesdayStart1.getValue(), tuesdayEnd1.getValue()));
-        if (wednesdayStart1.getValue() != null && wednesdayEnd1.getValue() != null)
-        	recitationTimes.put(DayOfWeek.WEDNESDAY, new RecitationTime(wednesdayStart1.getValue(), wednesdayEnd1.getValue()));
-        if (thursdayStart1.getValue() != null && thursdayEnd1.getValue() != null)
-        	recitationTimes.put(DayOfWeek.THURSDAY, new RecitationTime(thursdayStart1.getValue(), thursdayEnd1.getValue()));
-        if (fridayStart1.getValue() != null && fridayEnd1.getValue() != null)
-        	recitationTimes.put(DayOfWeek.FRIDAY, new RecitationTime(fridayStart1.getValue(), fridayEnd1.getValue()));
- 
+        lectureDayTimes.put(DayOfWeek.FRIDAY, new LectureTime(fridayStart.getValue(), fridayEnd.getValue()));
+
         String subject = courseSubject.getText().toUpperCase().strip();
         String number = courseNumber.getText().strip();
         String sem = semester.getValue().strip().toUpperCase();
         String yr = year.getText().strip();
-        
+
+        Syllabus s = new Syllabus(courseName.getText().strip(), Integer.parseInt(number),
+            subject, professorName.getText().strip(), Semester.valueOf(sem),
+            Integer.parseInt(yr), location.getText().strip(),
+            professorEmail.getText().strip(), extraCredit.getValue().equals("Yes"), lectureDayTimes, recitation.isSelected());
         if (subject.isBlank() || number.isBlank() || yr.isBlank()) {
             warning.setText("Fill out all fields marked with '*'");
-        } else if (getDatabase().getSyllabye().containsKey(subject + number + sem + yr)) {
-            warning.setText("A syllabus with that subject, number, semester, and year already exists.");
+        } else if (db.getSyllabye().containsKey(Database.computeKey(s))) {
+            warning.setText("A course or recitation with that subject, number, semester, and year already exists.");
         } else {
             try {
                 // Save the syllabus data
-                Syllabus s = new Syllabus(courseName.getText().strip(), Integer.parseInt(number),
-                        subject, professorName.getText().strip(), Semester.valueOf(sem),
-                        Integer.parseInt(yr), location.getText().strip(),
-                        professorEmail.getText().strip(), extraCredit.getValue().equals("Yes"), lectureDayTimes, recitationTimes);
                 warning.setText("");
-                getDatabase().add(s);
-                getDatabase().writeSyllabye();
+                db.add(s);
+                db.writeSyllabye();
                 // Go back to SelectionPage scene
-                // TODO this "switchScene" logic is repeated in many places
-                // Should we make all controller classes inherit from an abstract "Controller" class?
                 Parent root = FXMLLoader.load(getClass().getResource("/fxml/SelectionPage.fxml"));
                 Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
                 stage.setScene(new Scene(root));
@@ -264,43 +203,28 @@ public class CreateController implements Initializable {
             }
         }
     }
-    
+
     @FXML
     public void goHome(ActionEvent event) throws IOException {
-    	//note: nothing will save when the user presses the home button
-    	Parent root = FXMLLoader.load(getClass().getResource("/fxml/SelectionPage.fxml"));
-    	Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-    	stage.setScene(new Scene(root));
-    	stage.show();
+        //note: nothing will save when the user presses the home button
+        Parent root = FXMLLoader.load(getClass().getResource("/fxml/SelectionPage.fxml"));
+        Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        stage.setScene(new Scene(root));
+        stage.show();
     }
 
     @FXML
     public void filterTimes(ActionEvent event) {
         if (mondayStart.getValue() != null)
-            mondayEnd.setItems(mondayEnd.getItems().filtered(time -> time.isAfter(mondayStart.getValue())));
+        mondayEnd.setItems(mondayEnd.getItems().filtered(time -> time.isAfter(mondayStart.getValue())));
         if (tuesdayStart.getValue() != null)
-            tuesdayEnd.setItems(tuesdayEnd.getItems().filtered(time -> time.isAfter(tuesdayStart.getValue())));
+        tuesdayEnd.setItems(tuesdayEnd.getItems().filtered(time -> time.isAfter(tuesdayStart.getValue())));
         if (wednesdayStart.getValue() != null)
-            wednesdayEnd.setItems(wednesdayEnd.getItems().filtered(time -> time.isAfter(wednesdayStart.getValue())));
+        wednesdayEnd.setItems(wednesdayEnd.getItems().filtered(time -> time.isAfter(wednesdayStart.getValue())));
         if (thursdayStart.getValue() != null)
-            thursdayEnd.setItems(thursdayEnd.getItems().filtered(time -> time.isAfter(thursdayStart.getValue())));
+        thursdayEnd.setItems(thursdayEnd.getItems().filtered(time -> time.isAfter(thursdayStart.getValue())));
         if (fridayStart.getValue() != null)
-            fridayEnd.setItems(fridayEnd.getItems().filtered(time -> time.isAfter(fridayStart.getValue())));
-
-        if (mondayStart1.getValue() != null)
-            mondayEnd1.setItems(mondayEnd1.getItems().filtered(time -> time.isAfter(mondayStart1.getValue())));
-        if (tuesdayStart1.getValue() != null)
-            tuesdayEnd1.setItems(tuesdayEnd1.getItems().filtered(time -> time.isAfter(tuesdayStart1.getValue())));
-        if (wednesdayStart1.getValue() != null)
-            wednesdayEnd1.setItems(wednesdayEnd1.getItems().filtered(time -> time.isAfter(wednesdayStart1.getValue())));
-        if (thursdayStart1.getValue() != null)
-            thursdayEnd1.setItems(thursdayEnd1.getItems().filtered(time -> time.isAfter(thursdayStart1.getValue())));
-        if (fridayStart1.getValue() != null)
-            fridayEnd1.setItems(fridayEnd1.getItems().filtered(time -> time.isAfter(fridayStart1.getValue())));
-    }
-
-    public static Database getDatabase() {
-        return db;
+        fridayEnd.setItems(fridayEnd.getItems().filtered(time -> time.isAfter(fridayStart.getValue())));
     }
 
     public static void setDatabase(Database db) {
