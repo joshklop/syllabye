@@ -33,6 +33,12 @@ import java.util.ArrayList;
 import javafx.concurrent.Task;
 import java.lang.Thread;
 
+/**
+ * The CreateController implements the Initializable interface and controls the Create page.
+ * Users can manually input their information or upload a text file. 
+ * Then it creates a syllbus with the given information.
+ */
+
 public class CreateController implements Initializable {
     // Syllabus fields
     @FXML
@@ -86,7 +92,6 @@ public class CreateController implements Initializable {
     private ArrayList<LectureTimeComboBox> timeBoxes = new ArrayList<>();
     private static Database db;
 
-    // TODO make lectureTimeCombo editable
     public class LectureTimeComboBox {
         ComboBox<LocalTime> startBox;
         ComboBox<LocalTime> endBox;
@@ -122,7 +127,16 @@ public class CreateController implements Initializable {
             this.day = day;
         }
     }
-
+    
+     /**
+     * The initialize method initializes all of the GUI elements in the Create page.
+     * It adds the possible start/end times for lectures and recitations, adds the possible semesters, 
+     * and so on.
+     * 
+     * @param url
+     * @param bundle
+     */
+    
     @Override
     public void initialize(URL url, ResourceBundle bundle) {
         // Note: the order of these additions is important. We assume they are in chronological
@@ -138,7 +152,6 @@ public class CreateController implements Initializable {
         }
         semester.setValue("Spring");
 
-        // TODO change extraCredit to checkbox
         extraCredit.getItems().add("No");
         extraCredit.getItems().add("Yes");
         extraCredit.getSelectionModel().selectFirst();
@@ -158,7 +171,7 @@ public class CreateController implements Initializable {
                 super.succeeded();
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("h:mma");
                 LocalTimeStringConverter converter = new LocalTimeStringConverter(formatter, formatter);
-                // TODO there should be a "default" value that allows users to cancel a selection...
+                
                 for (LectureTimeComboBox box : timeBoxes) {
                     // Add times to the boxes
                     box.getStart().setConverter(converter);
@@ -169,7 +182,6 @@ public class CreateController implements Initializable {
                     box.getStart().setOnAction(e -> {
                         // Ensure at least one of the two boxes does not have a value
                         if (box.getStart().getSelectionModel().isEmpty() || box.getEnd().getSelectionModel().isEmpty()) {
-                            // TODO there is a more efficient way to filter them since we know they are already sorted
                             box.getEnd().setItems(box.getEnd().getItems().filtered(time -> time.isAfter(box.getStart().getValue())));
                         }
                     });
@@ -184,6 +196,15 @@ public class CreateController implements Initializable {
         Thread th = new Thread(task);
         th.start();
     }
+    
+    /**
+     * The onSave method is in charge of saving the information the user has provided and
+     * creates a Syllabus object with it. It also error-checks if a course already exists and if 
+     * they have not provided the required values.
+     * 
+     * @param event
+     * @throws IOException
+     */
 
     @FXML
     public void onSave(ActionEvent event) throws IOException {
@@ -200,7 +221,6 @@ public class CreateController implements Initializable {
         String sem = semester.getValue().strip().toUpperCase();
         String yr = year.getText().strip();
 
-        // TODO add converters and formatters to make this error checking cleaner
         if (subject.isBlank() || number.isBlank() || yr.isBlank()) {
             warning.setText("Fill out all fields marked with '*'");
         } else {
@@ -228,25 +248,40 @@ public class CreateController implements Initializable {
             }
         }
     }
+    
+    /**
+     * The goHome method switches the page to the Selection page whenever the user
+     * clicks on the home button.
+     * 
+     * @param event
+     * @throws IOException
+     */
 
     @FXML
     public void goHome(ActionEvent event) throws IOException {
-        // Note: nothing will save when the user presses the home button
         Parent root = FXMLLoader.load(getClass().getResource("/fxml/Selection.fxml"));
         Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         stage.setScene(new Scene(root));
         stage.show();
     }
+    
+    /**
+     * The uploadFile method is triggered when the user clicks on the "Upload File" button.
+     * It lets the user upload a text file from their computer.
+     * 
+     * @param event
+     * @throws IOException
+     */
 
     public void uploadFile(ActionEvent event) throws IOException {
         FileChooser fileChooser = new FileChooser();
-        fileChooser.getExtensionFilters().addAll(new ExtensionFilter("Text files", "*.txt"));
+        fileChooser.getExtensionFilters().add(new ExtensionFilter("Text files", "*.txt"));
         File file = fileChooser.showOpenDialog(null);
 
     if (file != null) {
             Scanner scanner = new Scanner(file);
             ArrayList<String> l = new ArrayList<String>();
-
+            //Reads the file by line
             while(scanner.hasNextLine()) {
                 //parse string
                 l.add(scanner.nextLine());
@@ -254,17 +289,24 @@ public class CreateController implements Initializable {
             scanner.close();
 
             String[] arr = new String[l.size()];
-
+            //Removes the prompt for every line. Ex: Course Name: is removed
             for(int i = 0; i < l.size(); i++) {
                 String line = l.get(i).toString().trim().substring(l.get(i).toString().lastIndexOf(": ") + 1);
                 arr[i] = line;
             }
+            //setText is called
             setText(arr);
 
         } else {
             fileWarning.setText("Error opening file.");
         }
     }
+    
+    /**
+     * The method setText sets the text and values for all of the textfields / comboboxes in the
+     * Create page. This method is triggered after the user successfully uploads a file.
+     * @param arr
+     */
 
     public void setText(String[] arr) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("h:mma");
@@ -314,14 +356,19 @@ public class CreateController implements Initializable {
                 break;
             }
         }
-    arr[10] = arr[10].trim();
+        arr[10] = arr[10].trim();
 
-        if(arr[10].equals("Yes")) {
+    	if(arr[10].equals("Yes")) {
             recitation.setSelected(true);
         }
 
     }
-
+    
+    /**
+     * Transfers the database data to the CreateController.
+     * @param db
+     */
+    
     public static void setDatabase(Database db) {
         CreateController.db = db;
     }

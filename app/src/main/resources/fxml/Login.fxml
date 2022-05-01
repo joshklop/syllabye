@@ -24,7 +24,7 @@
          <font>
             <Font size="16.0" />
          </font></PasswordField>
-      <Hyperlink layoutX="278.0" layoutY="396.0" onAction="#switchToForgotPasswordScene" prefHeight="23.0" prefWidth="100.0" style="-fx-focus-traversable: false;" text="Forgot password?" underline="true">
+      <Hyperlink layoutX="278.0" layoutY="396.0" onAction="#switchToForgotPasswordScene" prefHeight="23.0" prefWidth="163.0" style="-fx-focus-traversable: false;" text="Forgot password?" underline="true">
          <font>
             <Font size="12.0" />
          </font>

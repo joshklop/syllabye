@@ -29,6 +29,11 @@ import javafx.geometry.Pos;
 import javafx.scene.text.TextAlignment;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * The ScheduleController implements the Initializable interface and controls the
+ * Schedule page.
+ */
+
 public class ScheduleController implements Initializable {
     @FXML
     private VBox mondayBox;
