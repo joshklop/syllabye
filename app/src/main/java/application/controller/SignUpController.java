@@ -71,7 +71,7 @@ public class SignUpController implements Initializable {
         else {
         	String hashed = new Hash().hash256(cPass);
             ac.appendToFile(firstN, lastN, userN, eml, hashed, sAns);
-            root = FXMLLoader.load(getClass().getResource("/fxml/LoginPage.fxml"));
+            root = FXMLLoader.load(getClass().getResource("/fxml/Login.fxml"));
             stage = (Stage)((Node)event.getSource()).getScene().getWindow();
             scene = new Scene(root);
             stage.setScene(scene);
@@ -81,7 +81,7 @@ public class SignUpController implements Initializable {
     
     @FXML
     public void clickedHome(ActionEvent event) throws IOException {
-    	root = FXMLLoader.load(getClass().getResource("/fxml/LoginPage.fxml"));
+    	root = FXMLLoader.load(getClass().getResource("/fxml/Login.fxml"));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);

@@ -1,5 +1,6 @@
 package application.controller;
 
+import application.model.SemesterYear;
 import application.model.Database;
 import application.model.Syllabus;
 import javafx.fxml.FXML;
@@ -9,6 +10,7 @@ import java.util.ResourceBundle;
 import javafx.scene.control.ComboBox;
 import javafx.event.ActionEvent;
 import java.util.HashMap;
+import java.util.TreeMap;
 import javafx.scene.control.Button;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -40,10 +42,11 @@ public class ScheduleController implements Initializable {
     private VBox fridayBox;
     private static Database db;
     @FXML
-    private ComboBox<String> semesterComboBox;
+    private ComboBox<SemesterYear> semesterComboBox;
     @FXML
     private Button homeButton;
-    private HashMap<String, ArrayList<Syllabus>> syllabyeBySemester = new HashMap<String, ArrayList<Syllabus>>();
+
+    private TreeMap<SemesterYear, ArrayList<Syllabus>> syllabyeBySemester = new TreeMap<>();
 
     @Override
     public void initialize(URL url, ResourceBundle bundle) {
@@ -55,18 +58,33 @@ public class ScheduleController implements Initializable {
         boxes.put(DayOfWeek.FRIDAY, fridayBox);
         boxes.forEach((day, box) -> box.setSpacing(10));
 
-        // TODO sort semesters by month, year
-        for (Syllabus s : db.getSyllabye().values()) {
-            String key = s.getSemester().toString() + " " + s.getYear();
+        // Map semesters to syllabye
+        Syllabus[] syllabye = db.getSyllabye().values().toArray(new Syllabus[0]);
+        for (int i = 0; i < syllabye.length; ++i) {
+            SemesterYear key = new SemesterYear(syllabye[i].getSemester(), syllabye[i].getYear());
             syllabyeBySemester.putIfAbsent(key, new ArrayList<Syllabus>());
-            syllabyeBySemester.get(key).add(s);
+            syllabyeBySemester.get(key).add(syllabye[i]);
         }
-        semesterComboBox.getItems().addAll(syllabyeBySemester.keySet().toArray(new String[syllabyeBySemester.size()]));
+
+        // Add semesters (in sorted order) to ComboBox
+        semesterComboBox.getItems().addAll(syllabyeBySemester.keySet());
+
+        // Map colors to syllabye
+        Color[] availableColors = { 
+            Color.RED, Color.BLUE, Color.BLUEVIOLET, Color.DARKCYAN, Color.DARKORANGE,
+            Color.INDIANRED, Color.BLACK, Color.DEEPPINK, Color.GRAY, Color.GREEN, Color.BROWN, 
+        };
+        HashMap<String, Color> colors = new HashMap<>();
+        for (int i = 0; i < syllabye.length; ++i) {
+            colors.put(Database.computeKey(syllabye[i]), availableColors[i % availableColors.length]);
+        }
+
         // Add class labels to agenda when semester is selected
         semesterComboBox.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-            if (newValue == null || newValue == oldValue) {
+            if (newValue == null || newValue.equals(oldValue)) {
                 return;
             }
+
             // Remove existing labels
             boxes.forEach((day, box) -> {
                 if (box.getChildren().size() > 1) {
@@ -75,7 +93,7 @@ public class ScheduleController implements Initializable {
             });
 
             // Organize syllabye by day
-            HashMap<DayOfWeek, ArrayList<Syllabus>> syllabyeByDay = new HashMap<>();
+            HashMap<DayOfWeek, ArrayList<Syllabus>> syllabyeByDay = new HashMap<DayOfWeek,ArrayList<Syllabus>>();
             for (Syllabus s : syllabyeBySemester.get(newValue)) {
                 // Add new labels
                 for (DayOfWeek d : s.getLectureDayTimes().keySet()) {
@@ -84,10 +102,8 @@ public class ScheduleController implements Initializable {
                 }
             }
 
-            Color[] colors = { Color.RED, Color.BLUE, Color.BLUEVIOLET, Color.DARKCYAN,
-                Color.DARKORANGE, Color.INDIANRED };
-            // Sort syllabye within each day
             syllabyeByDay.forEach((day, aList) -> {
+                // Sort syllabye within each day
                 aList.sort((s1, s2) -> {
                     return s1.getLectureDayTimes()
                     .get(day)
@@ -107,7 +123,7 @@ public class ScheduleController implements Initializable {
                         text = s.getCourseSubject() + " " + s.getCourseNumber() + " " + s.getCourseName() + "\n" + startTime + "-" + endTime;
                     }
                     Label l = new Label(text);
-                    l.setTextFill(colors[i % colors.length]);
+                    l.setTextFill(colors.get(Database.computeKey(s)));
                     l.setWrapText(true);
                     l.setContentDisplay(ContentDisplay.CENTER);
                     l.setTextAlignment(TextAlignment.CENTER);
@@ -121,7 +137,7 @@ public class ScheduleController implements Initializable {
     }
 
     public void goToSelectionPage(ActionEvent e) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/fxml/SelectionPage.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/fxml/Selection.fxml"));
         Stage stage = (Stage)((Node)e.getSource()).getScene().getWindow();
         stage.setScene(new Scene(root));
         stage.show();

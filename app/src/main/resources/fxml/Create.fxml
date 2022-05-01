@@ -141,11 +141,11 @@
                               <Label text="Fri" GridPane.columnIndex="5" GridPane.halignment="CENTER" />
                               <Label text="Start" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
                               <Label text="End" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
-                              <ComboBox fx:id="mondayStart" onAction="#filterTimes" prefWidth="150.0" visibleRowCount="15" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
-                              <ComboBox fx:id="tuesdayStart" onAction="#filterTimes" prefWidth="115.0" visibleRowCount="15" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
-                              <ComboBox fx:id="wednesdayStart" onAction="#filterTimes" prefWidth="150.0" visibleRowCount="15" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
-                              <ComboBox fx:id="thursdayStart" onAction="#filterTimes" prefWidth="150.0" visibleRowCount="15" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
-                              <ComboBox fx:id="fridayStart" onAction="#filterTimes" prefWidth="150.0" visibleRowCount="15" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+                              <ComboBox fx:id="mondayStart" prefWidth="150.0" visibleRowCount="15" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+                              <ComboBox fx:id="tuesdayStart" prefWidth="115.0" visibleRowCount="15" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+                              <ComboBox fx:id="wednesdayStart" prefWidth="150.0" visibleRowCount="15" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+                              <ComboBox fx:id="thursdayStart" prefWidth="150.0" visibleRowCount="15" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+                              <ComboBox fx:id="fridayStart" prefWidth="150.0" visibleRowCount="15" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
                               <ComboBox fx:id="mondayEnd" prefWidth="150.0" visibleRowCount="15" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
                               <ComboBox fx:id="tuesdayEnd" prefWidth="150.0" visibleRowCount="15" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
                               <ComboBox fx:id="wednesdayEnd" prefWidth="150.0" visibleRowCount="15" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="2" />

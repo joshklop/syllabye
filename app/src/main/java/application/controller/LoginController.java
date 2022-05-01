@@ -33,7 +33,7 @@ public class LoginController {
 
     @FXML
     public void switchToSignUpScene(ActionEvent event ) throws IOException {
-        root = FXMLLoader.load(getClass().getResource("/fxml/SignUpPage.fxml"));
+        root = FXMLLoader.load(getClass().getResource("/fxml/SignUp.fxml"));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root, 800, 800);
         stage.setScene(scene);
@@ -42,7 +42,7 @@ public class LoginController {
 
     @FXML
     public void switchToForgotPasswordScene(ActionEvent event ) throws IOException {
-        root = FXMLLoader.load(getClass().getResource("/fxml/ForgotPasswordPage.fxml"));
+        root = FXMLLoader.load(getClass().getResource("/fxml/ForgotPassword.fxml"));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root, 800, 800);
         stage.setScene(scene);
@@ -57,7 +57,7 @@ public class LoginController {
         if (!(ac.isValidaccount(userN, passW)))
             warning.setText("*Username or password is incorrect*");
         else {
-            root = FXMLLoader.load(getClass().getResource("/fxml/SelectionPage.fxml"));
+            root = FXMLLoader.load(getClass().getResource("/fxml/Selection.fxml"));
             stage = (Stage)((Node)event.getSource()).getScene().getWindow();
             scene = new Scene(root, 800, 800);
             stage.setScene(scene);

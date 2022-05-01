@@ -70,7 +70,7 @@ public class ViewController implements Initializable {
 	@FXML
     public void goSelection(ActionEvent event) throws IOException {
     	//note: nothing will save when the user presses the home button
-    	Parent root = FXMLLoader.load(getClass().getResource("/fxml/SelectionPage.fxml"));
+    	Parent root = FXMLLoader.load(getClass().getResource("/fxml/Selection.fxml"));
     	Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
     	stage.setScene(new Scene(root));
     	stage.show();
