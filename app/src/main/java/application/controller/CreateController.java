@@ -80,6 +80,7 @@ public class CreateController implements Initializable {
     private ArrayList<LectureTimeComboBox> timeBoxes = new ArrayList<>();
     private static Database db;
 
+    // TODO make lectureTimeCombo editable
     public class LectureTimeComboBox {
         ComboBox<LocalTime> startBox;
         ComboBox<LocalTime> endBox;
@@ -135,7 +136,6 @@ public class CreateController implements Initializable {
         extraCredit.getItems().add("No");
         extraCredit.getItems().add("Yes");
         extraCredit.getSelectionModel().selectFirst();
-        // TODO make comboboxes editable
 
         ArrayList<LocalTime> times = new ArrayList<LocalTime>(24 * 60 / minuteIncrement);
         Task<ArrayList<LocalTime>> task = new Task<>() {
@@ -153,11 +153,25 @@ public class CreateController implements Initializable {
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("h:mma");
                 LocalTimeStringConverter converter = new LocalTimeStringConverter(formatter, formatter);
                 // TODO there should be a "default" value that allows users to cancel a selection...
-                for (int i = 0; i < timeBoxes.size(); ++i) {
-                    timeBoxes.get(i).getStart().setConverter(converter);
-                    timeBoxes.get(i).getStart().getItems().addAll(times);
-                    timeBoxes.get(i).getEnd().setConverter(converter);
-                    timeBoxes.get(i).getEnd().getItems().addAll(times);
+                for (LectureTimeComboBox box : timeBoxes) {
+                    // Add times to the boxes
+                    box.getStart().setConverter(converter);
+                    box.getStart().getItems().addAll(times);
+                    box.getEnd().setConverter(converter);
+                    box.getEnd().getItems().addAll(times);
+                    // Filter available times when a time is selected
+                    box.getStart().setOnAction(e -> {
+                        // Ensure at least one of the two boxes does not have a value
+                        if (box.getStart().getSelectionModel().isEmpty() || box.getEnd().getSelectionModel().isEmpty()) {
+                            // TODO there is a more efficient way to filter them since we know they are already sorted
+                            box.getEnd().setItems(box.getEnd().getItems().filtered(time -> time.isAfter(box.getStart().getValue())));
+                        }
+                    });
+                    box.getEnd().setOnAction(e -> {
+                        if (box.getStart().getSelectionModel().isEmpty() || box.getEnd().getSelectionModel().isEmpty()) {
+                            box.getStart().setItems(box.getStart().getItems().filtered(time -> time.isBefore(box.getEnd().getValue())));
+                        }
+                    });
                 }
             }
         };
@@ -180,28 +194,31 @@ public class CreateController implements Initializable {
         String sem = semester.getValue().strip().toUpperCase();
         String yr = year.getText().strip();
 
-        Syllabus s = new Syllabus(courseName.getText().strip(), Integer.parseInt(number),
-            subject, professorName.getText().strip(), Semester.valueOf(sem),
-            Integer.parseInt(yr), location.getText().strip(),
-            professorEmail.getText().strip(), extraCredit.getValue().equals("Yes"), lectureDayTimes,
-            recitation.isSelected());
+        // TODO add converters and formatters to make this error checking cleaner
         if (subject.isBlank() || number.isBlank() || yr.isBlank()) {
             warning.setText("Fill out all fields marked with '*'");
-        } else if (db.getSyllabye().containsKey(Database.computeKey(s))) {
-            warning.setText("A course or recitation with that subject, number, semester, and year already exists.");
         } else {
-            try {
-                // Save the syllabus data
-                warning.setText("");
-                db.add(s);
-                db.writeSyllabye();
-                // Go back to SelectionPage scene
-                Parent root = FXMLLoader.load(getClass().getResource("/fxml/Selection.fxml"));
-                Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-                stage.setScene(new Scene(root));
-                stage.show();
-            } catch (NumberFormatException e) {
-                warning.setText("'Course Number' and 'Year' must be numbers");
+            Syllabus s = new Syllabus(courseName.getText().strip(), Integer.parseInt(number),
+                subject, professorName.getText().strip(), Semester.valueOf(sem),
+                Integer.parseInt(yr), location.getText().strip(),
+                professorEmail.getText().strip(), extraCredit.getValue().equals("Yes"), lectureDayTimes,
+                recitation.isSelected());
+            if (db.getSyllabye().containsKey(Database.computeKey(s))) {
+                warning.setText("A course or recitation with that subject, number, semester, and year already exists.");
+            } else {
+                try {
+                    // Save the syllabus data
+                    warning.setText("");
+                    db.add(s);
+                    db.writeSyllabye();
+                    // Go back to SelectionPage scene
+                    Parent root = FXMLLoader.load(getClass().getResource("/fxml/Selection.fxml"));
+                    Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+                    stage.setScene(new Scene(root));
+                    stage.show();
+                } catch (NumberFormatException e) {
+                    warning.setText("'Course Number' and 'Year' must be numbers");
+                }
             }
         }
     }
@@ -213,15 +230,6 @@ public class CreateController implements Initializable {
         Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         stage.setScene(new Scene(root));
         stage.show();
-    }
-
-    @FXML
-    public void filterTimes(ActionEvent event) {
-        for (LectureTimeComboBox box : timeBoxes) {
-            if (box.getStart().getValue() != null) {
-                box.getEnd().setItems(box.getEnd().getItems().filtered(time -> time.isAfter(box.getStart().getValue())));
-            }
-        }
     }
 
     public static void setDatabase(Database db) {

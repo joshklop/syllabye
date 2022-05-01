@@ -8,11 +8,9 @@ import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 
-
 public class Accounts {
 
-    private ArrayList<Profile> profiles = new ArrayList<Profile>(); // TODO make static?
-    // TODO change to `File` object and load from resources (should it be `final`?)
+    private ArrayList<Profile> profiles = new ArrayList<Profile>();
     private static final String FILENAME = "/data/accountdata.txt";
 
     public static String getFilename() {
@@ -20,7 +18,6 @@ public class Accounts {
     }
 
     public void loadAccountsInfo() {
-        // TODO implement with Gson (Gson gives us parsing for free)
         FileReader fr;
         try {
             fr = new FileReader(getClass().getResource(FILENAME).getPath());
@@ -117,7 +114,6 @@ public class Accounts {
     	return false;
     }
     
-    //@Override
     public void changePassword(String userName, String email, String securityAnswer, String password) throws NoSuchAlgorithmException {
     	String userN;
     	String eml;
