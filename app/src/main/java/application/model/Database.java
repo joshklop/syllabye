@@ -63,6 +63,7 @@ public class Database {
     public void writeSyllabye() throws IOException {
         ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(file.getPath()));
         oos.writeObject(syllabye);
+        oos.close();
     }
     
     /**
