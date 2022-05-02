@@ -166,10 +166,10 @@ public class CreateController implements Initializable {
             title.setText("Add Syllabus");
         }
 
-        courseNumber.setTextFormatter(new TextFormatter<Number>(
-            new NumberStringConverter(NumberFormat.getIntegerInstance())));
-        year.setTextFormatter(new TextFormatter<Number>(
-            new NumberStringConverter(NumberFormat.getIntegerInstance())));
+        NumberFormat numberFormat = NumberFormat.getIntegerInstance();
+        numberFormat.setGroupingUsed(false);
+        courseNumber.setTextFormatter(new TextFormatter<Number>(new NumberStringConverter(numberFormat)));
+        year.setTextFormatter(new TextFormatter<Number>(new NumberStringConverter(numberFormat)));
 
         // Note: the order of these additions is important. We assume they are in chronological
         // order and that the start/end boxes alternate.
@@ -345,13 +345,13 @@ public class CreateController implements Initializable {
      * @param arr
      */
     public void setText(String[] arr) {
-        year.setText(arr[1]);
-        courseSubject.setText(arr[2]);
-        courseNumber.setText(arr[3]);
-        courseName.setText(arr[4]);
-        location.setText(arr[5]);
-        professorName.setText(arr[6]);
-        professorEmail.setText(arr[7]);;
+        year.setText(arr[1].trim());
+        courseSubject.setText(arr[2].trim());
+        courseNumber.setText(arr[3].trim());
+        courseName.setText(arr[4].trim());
+        location.setText(arr[5].trim());
+        professorName.setText(arr[6].trim());
+        professorEmail.setText(arr[7].trim());;
         extraCredit.setValue(arr[8].trim());
 
         String[] lTime = arr[9].split("[,]",0);
