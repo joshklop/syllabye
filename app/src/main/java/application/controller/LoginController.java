@@ -54,7 +54,9 @@ public class LoginController {
         String userN = userName.getText();
         String passW = password.getText();
         ac.loadAccountsInfo();
-        if (!(ac.isValidaccount(userN, passW)))
+        if (userN.isBlank() || passW.isBlank())
+        	warning.setText("*Please fill in all fields*");
+        else if (!(ac.isValidaccount(userN, passW)))
             warning.setText("*Username or password is incorrect*");
         else {
             root = FXMLLoader.load(getClass().getResource("/fxml/Selection.fxml"));
