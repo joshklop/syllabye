@@ -97,7 +97,7 @@ public class CreateController implements Initializable {
     @FXML
     private Label title;
 
-    private int minuteIncrement = 15;
+    private int minuteIncrement = 5;
     private HashMap<DayOfWeek,LectureTimeComboBox> timeBoxes = new HashMap<>();
     private static boolean updateMode = false;
     private String updateSyllabusKey = ""; // Used to keep track of original syllabus
