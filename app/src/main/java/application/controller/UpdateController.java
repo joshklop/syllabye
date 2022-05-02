@@ -16,6 +16,13 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.scene.Node;
 
+/**
+ * The UpdateController implements the Initializable interface and controls the Update page.
+ * Users can select a syllabus from a dropdown to update. Once selected, users are redirected
+ * to the Create page with the fields auto-populated with the selected syllabus's data.
+ * Users can quit the update process at any time by clicking on the cancel button on the update
+ * page or by clicking on the home button on the create page.
+ */
 public class UpdateController implements Initializable {
     @FXML
     private ComboBox<Syllabus> syllabusBox;
@@ -26,6 +33,9 @@ public class UpdateController implements Initializable {
 
     private static Database db;
 
+    /**
+     * The SyllabusCell class is used to format the syllabus objects in the ComboBox dropdown menu.
+     */
     private static final class SyllabusCell extends ListCell<Syllabus> {
         @Override
         protected void updateItem(Syllabus s, boolean empty) {
@@ -42,6 +52,11 @@ public class UpdateController implements Initializable {
         }
     }
 
+    /**
+     * Called by javafx when the FXML is loaded.
+     * @param url
+     * @param bundle
+     */
     @Override
     public void initialize(URL url, ResourceBundle bundle) {
         for (Syllabus s : db.getSyllabye().values()) {
@@ -82,6 +97,11 @@ public class UpdateController implements Initializable {
         });
     }
 
+    /**
+     * Set the database on the update controller. This is static so all update controllers
+     * initialized by javafx have the same database.
+     * @param db The database
+     */
     public static void setDatabase(Database db) {
         UpdateController.db = db;
     }

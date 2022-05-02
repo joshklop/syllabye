@@ -13,6 +13,11 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Button;
 
+/**
+ * The SelectionController controls the selection page, which is the "hub" of the application.
+ * It has buttons that enable the user to create, view, update, and delete syllabus objects, as
+ * well as view their schedule for a given semester and log out of the application.
+ */
 public class SelectionController {
     @FXML
     private Stage stage;
@@ -25,6 +30,11 @@ public class SelectionController {
     @FXML
     private Button schedule;
 
+    /**
+     * Event handler for the logout button.
+     * @param event
+     * @throws IOException
+     */
     @FXML
     public void logout(ActionEvent event) throws IOException {
         Alert alert = new Alert(AlertType.CONFIRMATION);
@@ -40,6 +50,10 @@ public class SelectionController {
         } 
     }
 
+    /**
+     * Event handler for the Add button.
+     * @throws IOException
+     */
     @FXML
     public void switchToAddScene(ActionEvent event) throws IOException {
         root = FXMLLoader.load(getClass().getResource("/fxml/Create.fxml"));
@@ -48,7 +62,12 @@ public class SelectionController {
         stage.setScene(scene);
         stage.show();
     }
-    
+
+    /**
+     * Event handler for the View button.
+     * @param event
+     * @throws IOException
+     */
     @FXML
     public void switchToViewScene(ActionEvent event) throws IOException {
         root = FXMLLoader.load(getClass().getResource("/fxml/View.fxml"));
@@ -58,6 +77,11 @@ public class SelectionController {
         stage.show();
     }
 
+    /**
+     * Event handler for the Schedule button.
+     * @param event
+     * @throws IOException
+     */
     @FXML
     public void switchToSchedule(ActionEvent event) throws IOException {
         root = FXMLLoader.load(getClass().getResource("/fxml/Schedule.fxml"));
@@ -66,7 +90,12 @@ public class SelectionController {
         stage.setScene(scene);
         stage.show(); 
     }
-    
+
+    /**
+     * Event handler for the Delete button.
+     * @param event
+     * @throws IOException
+     */
     @FXML
     public void switchToDeleteScene(ActionEvent event) throws IOException {
         root = FXMLLoader.load(getClass().getResource("/fxml/Delete.fxml"));
@@ -75,7 +104,12 @@ public class SelectionController {
         stage.setScene(scene);
         stage.show(); 
     }
-    
+
+    /**
+     * Event handler for the Update button.
+     * @param event
+     * @throws IOException
+     */
     @FXML
     public void switchToUpdate(ActionEvent event) throws IOException {
         root = FXMLLoader.load(getClass().getResource("/fxml/Update.fxml"));
@@ -84,5 +118,5 @@ public class SelectionController {
         stage.setScene(scene);
         stage.show(); 
     }
-    
+
 }
