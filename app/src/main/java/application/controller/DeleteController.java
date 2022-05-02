@@ -19,6 +19,13 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+/**
+ * The DeleteController implements the Initializable interface
+ * and controls the Delete page.
+ * Users will be able to delete courses that they
+ * have created or any lecture/recitations.
+ *
+ */
 public class DeleteController implements Initializable {
 
     @FXML
@@ -37,7 +44,15 @@ public class DeleteController implements Initializable {
     @FXML
     private Label warn;
     private static Database db;
-
+    
+    /**
+     * The initialize method initializes the Delete page
+     * and loads the GUI elements with the current
+     * Syllabus objects.
+     * 
+     * @param location
+     * @param resources
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         String sem;
@@ -51,7 +66,14 @@ public class DeleteController implements Initializable {
         choices.add("Delete both");
         delete.getItems().addAll(choices); 
     }
-
+    
+    /**
+     * The go Selection method takes the user to the Selection page
+     * when they click on the homeButton.
+     * 
+     * @param event
+     * @throws IOException
+     */
     @FXML
     public void goSelection(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/fxml/Selection.fxml"));
@@ -59,7 +81,14 @@ public class DeleteController implements Initializable {
         stage.setScene(new Scene(root));
         stage.show();
     }
-
+    
+    /**
+     * The onDelete method removes the chosen object from the Syllabye application.
+     * It also error-checks if fields are blank, if the lecture/lab/recitation exists.
+     * 
+     * @param event
+     * @throws IOException
+     */
     @FXML
     public void onDelete(ActionEvent event) throws IOException {
         String subject = courseSubject.getText().toUpperCase().strip();
@@ -99,7 +128,13 @@ public class DeleteController implements Initializable {
             }
         }
     }
-
+    
+    /**
+     * The setSyllabye method transfers the Syllabus data to the
+     * DeleteController.
+     * 
+     * @param db
+     */
     public static void setSyllabye(Database db) {
         DeleteController.db = db;
     } 

@@ -32,6 +32,7 @@ import java.time.format.DateTimeFormatter;
 /**
  * The ScheduleController implements the Initializable interface and controls the
  * Schedule page.
+ * Users will be able to view the course schedule for the semester that they picked.
  */
 
 public class ScheduleController implements Initializable {
@@ -53,6 +54,15 @@ public class ScheduleController implements Initializable {
 
     private TreeMap<SemesterYear, ArrayList<Syllabus>> syllabyeBySemester = new TreeMap<>();
 
+    /**
+     * The initialize method initializes the schedule page.
+     * Labels of the courses are created after the user clicks a semester in the
+     * semester combobox.
+     * 
+     * @param url
+     * @param bundle
+     */
+    
     @Override
     public void initialize(URL url, ResourceBundle bundle) {
         HashMap<DayOfWeek, VBox> boxes = new HashMap<>();
@@ -140,14 +150,23 @@ public class ScheduleController implements Initializable {
             });
         });
     }
-
+    
+    /**
+     * The goToSelectionPage method takes the user back to the 
+     * Selection page when they click the homeButton
+     * @param e
+     */
     public void goToSelectionPage(ActionEvent e) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/fxml/Selection.fxml"));
         Stage stage = (Stage)((Node)e.getSource()).getScene().getWindow();
         stage.setScene(new Scene(root));
         stage.show();
     }
-
+    
+    /**
+     * The setDatabase method transfers the data to this controller.
+     * @param db
+     */
     public static void setDatabase(Database db) {
         ScheduleController.db = db;
     }

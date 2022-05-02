@@ -399,6 +399,12 @@ public class CreateController implements Initializable {
 
     }
 
+    /**
+     * The autofill method is triggered whenever the user
+     * updates a field in the UpdateController.
+     * 
+     * @param s
+     */
     public void autofill(Syllabus s) {
         updateSyllabusKey = Database.computeKey(s).toString();
         if (s.getCourseName() != null) {
