@@ -36,6 +36,8 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.TextFormatter;
 import javafx.util.converter.NumberStringConverter;
 import java.text.NumberFormat;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.FXCollections;
 
 /**
  * The CreateController implements the Initializable interface and controls the Create page.
@@ -101,6 +103,7 @@ public class CreateController implements Initializable {
     private String updateSyllabusKey = ""; // Used to keep track of original syllabus
     private static Database db;
     private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("h:mma");
+    private ArrayList<LocalTime> times = new ArrayList<LocalTime>(24 * 60 / minuteIncrement);
 
     public class LectureTimeComboBox {
         ComboBox<LocalTime> startBox;
@@ -166,10 +169,10 @@ public class CreateController implements Initializable {
             title.setText("Add Syllabus");
         }
 
-        courseNumber.setTextFormatter(new TextFormatter<Number>(
-            new NumberStringConverter(NumberFormat.getIntegerInstance())));
-        year.setTextFormatter(new TextFormatter<Number>(
-            new NumberStringConverter(NumberFormat.getIntegerInstance())));
+        NumberFormat numberFormat = NumberFormat.getIntegerInstance();
+        numberFormat.setGroupingUsed(false);
+        courseNumber.setTextFormatter(new TextFormatter<Number>(new NumberStringConverter(numberFormat)));
+        year.setTextFormatter(new TextFormatter<Number>(new NumberStringConverter(numberFormat)));
 
         // Note: the order of these additions is important. We assume they are in chronological
         // order and that the start/end boxes alternate.
@@ -188,7 +191,6 @@ public class CreateController implements Initializable {
         extraCredit.getItems().add("Yes");
         extraCredit.getSelectionModel().selectFirst();
 
-        ArrayList<LocalTime> times = new ArrayList<LocalTime>(24 * 60 / minuteIncrement);
         Task<ArrayList<LocalTime>> task = new Task<>() {
             @Override protected ArrayList<LocalTime> call() {
                 LocalTime time = LocalTime.of(0, 0);
@@ -203,25 +205,19 @@ public class CreateController implements Initializable {
                 super.succeeded();
                 LocalTimeStringConverter converter = new LocalTimeStringConverter(formatter, formatter);
                 for (LectureTimeComboBox box : timeBoxes.values()) {
+                    FilteredList<LocalTime> startList = new FilteredList<>(FXCollections.observableArrayList(times), t -> true);
+                    FilteredList<LocalTime> endList = new FilteredList<>(FXCollections.observableArrayList(times), t -> true);
                     box.getStart().setConverter(converter);
                     box.getStart().setCellFactory(listView -> new LocalTimeCell());
                     box.getStart().setButtonCell(new LocalTimeCell());
-                    box.getStart().getItems().addAll(times);
+                    box.getStart().setItems(startList);
                     box.getEnd().setConverter(converter);
                     box.getEnd().setCellFactory(listView -> new LocalTimeCell());
                     box.getEnd().setButtonCell(new LocalTimeCell());
-                    box.getEnd().getItems().addAll(times);
-                    // Filter available times when a time is selected
+                    box.getEnd().setItems(endList);
+                    // Filter times to ensure only valid ranges are selected
                     box.getStart().setOnAction(e -> {
-                        // Ensure at least one of the two boxes does not have a value
-                        if (box.getStart().getSelectionModel().isEmpty() || box.getEnd().getSelectionModel().isEmpty()) {
-                            box.getEnd().setItems(box.getEnd().getItems().filtered(time -> time.isAfter(box.getStart().getValue())));
-                        }
-                    });
-                    box.getEnd().setOnAction(e -> {
-                        if (box.getStart().getSelectionModel().isEmpty() || box.getEnd().getSelectionModel().isEmpty()) {
-                            box.getStart().setItems(box.getStart().getItems().filtered(time -> time.isBefore(box.getEnd().getValue())));
-                        }
+                        endList.setPredicate(time -> time.isAfter(box.getStart().getValue()));
                     });
                 }
             }
@@ -345,13 +341,13 @@ public class CreateController implements Initializable {
      * @param arr
      */
     public void setText(String[] arr) {
-        year.setText(arr[1]);
-        courseSubject.setText(arr[2]);
-        courseNumber.setText(arr[3]);
-        courseName.setText(arr[4]);
-        location.setText(arr[5]);
-        professorName.setText(arr[6]);
-        professorEmail.setText(arr[7]);;
+        year.setText(arr[1].trim());
+        courseSubject.setText(arr[2].trim());
+        courseNumber.setText(arr[3].trim());
+        courseName.setText(arr[4].trim());
+        location.setText(arr[5].trim());
+        professorName.setText(arr[6].trim());
+        professorEmail.setText(arr[7].trim());;
         extraCredit.setValue(arr[8].trim());
 
         String[] lTime = arr[9].split("[,]",0);
