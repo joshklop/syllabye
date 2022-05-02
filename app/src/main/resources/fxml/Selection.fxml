@@ -4,9 +4,9 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.SelectionController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.SelectionController">
    <children>
-      <Button layoutX="125.0" layoutY="445.0" mnemonicParsing="false" prefHeight="238.0" prefWidth="243.0" style="-fx-background-radius: 150; -fx-background-color: green;" text="Update" textFill="WHITE">
+      <Button fx:id="update" layoutX="125.0" layoutY="445.0" mnemonicParsing="false" onAction="#switchToUpdate" prefHeight="238.0" prefWidth="243.0" style="-fx-background-radius: 150; -fx-background-color: green;" text="Update" textFill="WHITE">
          <font>
             <Font size="35.0" />
          </font></Button>

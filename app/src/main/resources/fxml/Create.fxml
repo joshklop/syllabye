@@ -172,7 +172,7 @@
       <AnchorPane prefHeight="44.0" prefWidth="766.0" BorderPane.alignment="CENTER">
          <children>
             <Button fx:id="home" layoutX="697.0" layoutY="9.0" mnemonicParsing="false" onAction="#goHome" prefHeight="26.0" prefWidth="62.0" text="Home" />
-            <Label alignment="CENTER" layoutX="345.0" layoutY="8.0" prefHeight="34.0" prefWidth="166.0" text="Add Syllabus">
+            <Label fx:id="title" alignment="CENTER" layoutX="345.0" layoutY="8.0" prefHeight="34.0" prefWidth="166.0">
                <font>
                   <Font name="System Bold" size="23.0" />
                </font>

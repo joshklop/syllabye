@@ -1,31 +1,29 @@
 package application.model;
 
+import java.io.Serializable;
 import java.time.DayOfWeek;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.HashMap;
 
-
-import java.io.Serializable;
-
 public class Syllabus implements Serializable {
     private String courseName;
-    private int courseNumber;
+    private Integer courseNumber;
     private String courseSubject;
     private String professorName;
     private Semester semester;
-    private int year;
+    private Integer year;
     private String location;
     private String professorEmail;
-    private boolean extraCredit;
+    private Boolean extraCredit;
     private HashMap<DayOfWeek,LectureTime> lectureDayTimes;
-    private boolean recitation;
+    private Boolean recitation;
 
-    public Syllabus(String courseName, int courseNumber, String courseSubject, 
-            String professorName, Semester semester, int year, String location,
-            String professorEmail, boolean extraCredit, 
-            HashMap<DayOfWeek,LectureTime> lectureDayTimes, boolean recitation) {
+    public Syllabus(String courseName, Integer courseNumber, String courseSubject, 
+            String professorName, Semester semester, Integer year, String location,
+            String professorEmail, Boolean extraCredit, 
+            HashMap<DayOfWeek,LectureTime> lectureDayTimes, Boolean recitation) {
         this.setCourseName(courseName);
         this.setCourseNumber(courseNumber);
         this.setCourseSubject(courseSubject);
@@ -46,7 +44,7 @@ public class Syllabus implements Serializable {
     		return subjectScore + numberScore;
     	}
     };
-    
+
     public String getCourseName() {
         return courseName;
     }
@@ -63,11 +61,11 @@ public class Syllabus implements Serializable {
         this.courseSubject = courseSubject;
     }
 
-    public int getCourseNumber() {
+    public Integer getCourseNumber() {
         return courseNumber;
     }
 
-    public void setCourseNumber(int courseNumber) {
+    public void setCourseNumber(Integer courseNumber) {
         this.courseNumber = courseNumber;
     }
 
@@ -87,11 +85,11 @@ public class Syllabus implements Serializable {
         this.semester = semester;
     }
 
-    public int getYear() {
+    public Integer getYear() {
         return year;
     }
 
-    public void setYear(int year) {
+    public void setYear(Integer year) {
         this.year = year;
     }
 
@@ -111,11 +109,11 @@ public class Syllabus implements Serializable {
         this.professorEmail = professorEmail;
     }
 
-    public boolean isExtraCredit() {
+    public Boolean isExtraCredit() {
         return extraCredit;
     }
 
-    public void setExtraCredit(boolean extraCredit) {
+    public void setExtraCredit(Boolean extraCredit) {
         this.extraCredit = extraCredit;
     }
     
@@ -146,11 +144,11 @@ public class Syllabus implements Serializable {
         this.lectureDayTimes = lectures;
     }
 
-    public boolean isRecitation() {
+    public Boolean isRecitation() {
         return recitation;
     }
 
-    public void setRecitation(boolean recitation) {
+    public void setRecitation(Boolean recitation) {
         this.recitation = recitation;
     }
 }

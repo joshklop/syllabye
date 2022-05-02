@@ -71,10 +71,18 @@ public class SelectionController {
     public void switchToDeleteScene(ActionEvent event) throws IOException {
         root = FXMLLoader.load(getClass().getResource("/fxml/Delete.fxml"));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
+        scene = new Scene(root, 800, 800);
         stage.setScene(scene);
         stage.show(); 
     }
     
+    @FXML
+    public void switchToUpdate(ActionEvent event) throws IOException {
+        root = FXMLLoader.load(getClass().getResource("/fxml/Update.fxml"));
+        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(root, 800, 800);
+        stage.setScene(scene);
+        stage.show(); 
+    }
     
 }
