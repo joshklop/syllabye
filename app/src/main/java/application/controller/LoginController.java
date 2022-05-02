@@ -16,6 +16,12 @@ import javafx.stage.Stage;
 
 import application.model.Accounts;
 
+/**
+ * The LoginController controls the login page and opens
+ * the SignUp and ForgotPassword page.
+ * This takes the user to the SelectionPage when 
+ * they successfully log in to Syllabye.
+ */
 public class LoginController {
     @FXML
     private Stage stage;
@@ -30,7 +36,15 @@ public class LoginController {
     @FXML
     private Label warning;
     private static Accounts ac;
-
+    
+    /**
+     * The switchToSignUpScene method switches the user to
+     * the SignUp page whenever they click the sign-up
+     * button.
+     * 
+     * @param event
+     * @throws IOException
+     */
     @FXML
     public void switchToSignUpScene(ActionEvent event ) throws IOException {
         root = FXMLLoader.load(getClass().getResource("/fxml/SignUp.fxml"));
@@ -39,7 +53,15 @@ public class LoginController {
         stage.setScene(scene);
         stage.show();
     }
-
+    
+    /**
+     * The switchToForgotPasswordScene method takes the user to the
+     * ForgotPassword page whenever they click on the "Forgot 
+     * password" link.
+     * 
+     * @param event
+     * @throws IOException
+     */
     @FXML
     public void switchToForgotPasswordScene(ActionEvent event ) throws IOException {
         root = FXMLLoader.load(getClass().getResource("/fxml/ForgotPassword.fxml"));
@@ -48,7 +70,17 @@ public class LoginController {
         stage.setScene(scene);
         stage.show();
     }
-
+    
+    /**
+     * The switchToSelectionScene checks if the user has filled out
+     * all of the necessary fields and if the password was correct.
+     * It will switch the user to the SelectionPage when they successfully 
+     * log in.
+     * 
+     * @param event
+     * @throws IOException
+     * @throws NoSuchAlgorithmException
+     */
     @FXML
     public void switchToSelectionScene(ActionEvent event ) throws IOException, NoSuchAlgorithmException {
         String userN = userName.getText();
@@ -66,7 +98,13 @@ public class LoginController {
             stage.show();
         } 
     }
-
+    
+    /**
+     * The setAccounts method transfers the Accounts object
+     * to this controller.
+     * 
+     * @param accounts
+     */
     public static void setAccounts(Accounts accounts) {
         ac = accounts;
     }
