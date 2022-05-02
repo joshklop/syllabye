@@ -20,6 +20,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 public class ViewController implements Initializable {
+	//Instance Variables
 	@FXML
 	private TextArea fallText;
 	@FXML
@@ -44,16 +45,28 @@ public class ViewController implements Initializable {
 	private static SortSyllabye ss;
 	private static HashMap<String, Syllabus> sb;
 
-	 
+	/**
+	 * Sets the syllabye data to viewController
+	 * @param syllabye
+	 */
 	public static void setSyllabye (HashMap<String,Syllabus> syllabye) {
 		sb = syllabye;
 	}
 	
 	@Override
+	/**
+	 * Sorts the syllabye data into different semesters
+	 */
 	public void initialize(URL location, ResourceBundle resources) {
 		ss = new SortSyllabye(sb);	
 	}
 	
+	/**
+	 * Iterate through the ArrayList and store the content of the
+	 * toString function of the syllabus if it's a valid year
+	 * @param s Syllabus
+	 * @return content String
+	 */
 	public String iterate(Iterator<Syllabus> s) {
 		String content = "";
 		while (s.hasNext()) {
@@ -67,6 +80,11 @@ public class ViewController implements Initializable {
 			return content;
 	}
 	
+	/**
+	 * Go back to the selection page 
+	 * @param event ActionEvent
+	 * @throws IOException 
+	 */
 	@FXML
     public void goSelection(ActionEvent event) throws IOException {
     	//note: nothing will save when the user presses the home button
@@ -76,6 +94,10 @@ public class ViewController implements Initializable {
     	stage.show();
     }
 	
+	/**
+	 * Display the information for the spring semester and
+	 * the chosen year
+	 */
 	@FXML
 	public void springInfo() {
 		sprText.setVisible(true);
@@ -85,6 +107,10 @@ public class ViewController implements Initializable {
 		sprText.setText(iterate(s));
 	}
 	
+	/**
+	 * Display the information for the may semester and
+	 * the chosen year
+	 */
 	@FXML
 	public void mayInfo() {
 		mayText.setVisible(true);
@@ -95,6 +121,10 @@ public class ViewController implements Initializable {
 		
 	}
 	
+	/**
+	 * Display the information for the summer semester
+	 * and the chosen year
+	 */
 	@FXML
 	public void summerInfo() {
 		sumText.setVisible(true);
@@ -104,6 +134,10 @@ public class ViewController implements Initializable {
 		sumText.setText(iterate(s));
 	}
 	
+	/**
+	 * Display the information for the fall semester and
+	 * the chosen year
+	 */
 	@FXML
 	public void fallInfo() {
 		fallText.setVisible(true);
@@ -113,6 +147,10 @@ public class ViewController implements Initializable {
 		fallText.setText(iterate(s));
 	}
 	
+	/**
+	 * Display the information for the winter semester and
+	 * the chosen year
+	 */
 	@FXML
 	public void winterInfo() {
 		winText.setVisible(true);
