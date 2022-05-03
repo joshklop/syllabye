@@ -105,6 +105,10 @@ public class CreateController implements Initializable {
     private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("h:mma");
     private ArrayList<LocalTime> times = new ArrayList<LocalTime>(24 * 60 / minuteIncrement);
 
+    /**
+     * The LectureTimeComboBox is a helper class that combines the box where the user enters a 
+     * lecture start time and the box where the user enters a lecture end time for a given day.
+     */
     public class LectureTimeComboBox {
         ComboBox<LocalTime> startBox;
         ComboBox<LocalTime> endBox;
