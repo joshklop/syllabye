@@ -22,6 +22,10 @@ import javafx.stage.Stage;
 import application.model.Accounts;
 import application.model.Hash;
 
+/**
+ * SignUpController is used to display the SignUpPage and controller the functions within it.
+ * @author 
+ */
 public class SignUpController implements Initializable {
     @FXML
     private ChoiceBox<String> securityQuestions;
@@ -51,6 +55,12 @@ public class SignUpController implements Initializable {
     private static Accounts ac;
 
 
+    /**
+     * Gets the information to start a new account then switches to the login screen if all information is correct
+     * @param event is used to set the stage
+     * @throws IOException is thrown if an exception of the matching type is found
+     * @throws NoSuchAlgorithmException is thrown if an exception of the matching type is found
+     */
     @FXML
     public void switchToLoginScene(ActionEvent event ) throws IOException, NoSuchAlgorithmException {
         String firstN = this.firstName.getText();
@@ -79,6 +89,11 @@ public class SignUpController implements Initializable {
         }
     }
     
+    /**
+     * Switches to the login screen
+     * @param event is used to set the stage
+     * @throws IOException is thrown if an exception of the matching type is found
+     */
     @FXML
     public void clickedHome(ActionEvent event) throws IOException {
     	root = FXMLLoader.load(getClass().getResource("/fxml/Login.fxml"));
@@ -88,6 +103,9 @@ public class SignUpController implements Initializable {
         stage.show();
     }
 
+    /**
+     * Initializes the security question answers
+     */
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
         questions.add("What's your favorite programming language?");
@@ -96,6 +114,10 @@ public class SignUpController implements Initializable {
         securityQuestions.getItems().addAll(questions);
     }
 
+    /**
+     * Sets Accounts ac equal to accounts
+     * @param accounts is used to set Accounts ac equal to accounts
+     */
     public static void setAccounts(Accounts accounts) {
         ac = accounts;
     }
