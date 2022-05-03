@@ -19,8 +19,15 @@ import application.controller.ForgotPasswordController;
 import application.model.Database;
 import application.model.Accounts;
 
+/**
+ * The Main class is used to start the login screen and sets all the controllers with the database and accounts
+ * @author 
+ */
 public class Main extends Application {
 
+	/**
+	 * Sets up and shows the FXML Login page
+	 */
     @Override
     public void start(Stage primaryStage) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/fxml/Login.fxml"));
@@ -30,6 +37,13 @@ public class Main extends Application {
         primaryStage.show();
     }
 
+    /**
+     * Connects the controllers with the database and accounts
+     * @param args is used to call launch
+     * @throws FileNotFoundException if there is an exception of the matching type
+     * @throws IOException if there is an exception of the matching type
+     * @throws ClassNotFoundException if there is an exception of the matching type
+     */
     public static void main(String[] args) throws FileNotFoundException, IOException, ClassNotFoundException {
         Database db = new Database(Main.class.getResource("/data/syllabyeDB"));
         try {
